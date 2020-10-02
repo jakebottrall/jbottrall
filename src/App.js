@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { SnackbarProvider } from "notistack";
+import React from "react";
+import { Provider } from "react-redux";
+import { BrowserRouter as Router } from "react-router-dom";
 
-function App() {
+import { CssBaseline } from "@material-ui/core/";
+import { ThemeProvider } from "@material-ui/core/styles";
+
+import Loader from "./components/Feedback/Loader";
+import Notifier from "./components/Feedback/Notifier";
+import Main from "./components/Main";
+import store from "./store";
+import { theme } from "./themes";
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router>
+        <ThemeProvider theme={theme}>
+          <SnackbarProvider
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right",
+            }}
+          >
+            <CssBaseline />
+            <Loader />
+            <Notifier />
+            <Main />
+          </SnackbarProvider>
+        </ThemeProvider>
+      </Router>
+    </Provider>
   );
 }
-
-export default App;

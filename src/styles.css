@@ -1,0 +1,27 @@
+body {
+  overflow: hidden;
+}
+
+.slide-enter {
+  opacity: 0;
+  transform: translate(-1500px, 0px);
+}
+
+.slide-enter.slide-enter-active {
+  opacity: 1;
+  transform: translate(0px, 0px);
+  transition: all 0.5s ease-in;
+}
+
+.slide-exit {
+  transform: translate(0px, 0px);
+}
+
+.slide-exit.slide-exit-active {
+  transform: translate(3000px, 0px);
+  transition: all 0.5s ease-in;
+}
+
+.grecaptcha-badge {
+  visibility: hidden;
+}
