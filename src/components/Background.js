@@ -75,30 +75,14 @@ const useStyles = makeStyles((theme) => ({
     top: 0,
   },
   rollBackground: {
-    animation: "$bg 60s linear infinite",
+    animation: "$bg 20s linear infinite",
   },
   "@keyframes bg": {
     "0%": {
       transform: "translate3d(0,0,0)",
     },
     "100%": {
-      transform: "translate3d(500px,0,0)",
-    },
-    [theme.breakpoints.up("md")]: {
-      "0%": {
-        transform: "translate3d(0,0,0)",
-      },
-      "100%": {
-        transform: "translate3d(1000px,0,0)",
-      },
-    },
-    [theme.breakpoints.up("lg")]: {
-      "0%": {
-        transform: "translate3d(0,0,0)",
-      },
-      "100%": {
-        transform: "translate3d(1500px,0,0)",
-      },
+      transform: "translate3d(1500px,0,0)",
     },
   },
   boatWrapper: {
