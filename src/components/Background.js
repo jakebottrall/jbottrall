@@ -64,9 +64,6 @@ const useStyles = makeStyles((theme) => ({
     transition: "top 1s ease-out",
     transform: "translate3d(0,0,0)",
     background: `#DCE0F0 url(${BG}) bottom left`,
-    [theme.breakpoints.up("md")]: {
-      backgroundSize: "1000px auto",
-    },
     [theme.breakpoints.up("lg")]: {
       backgroundSize: "1500px auto",
     },
@@ -99,10 +96,6 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     bottom: "calc(-100vh + 50px)",
     transition: "right 3s ease-out",
-    [theme.breakpoints.up("md")]: {
-      height: 75,
-      bottom: "calc(-100vh + 100px)",
-    },
     [theme.breakpoints.up("lg")]: {
       height: 100,
       bottom: "calc(-100vh + 125px)",
@@ -110,9 +103,6 @@ const useStyles = makeStyles((theme) => ({
   },
   slideBoat: {
     right: "calc(-100vw + 150px)",
-    [theme.breakpoints.up("md")]: {
-      right: "calc(-100vw + 200px)",
-    },
     [theme.breakpoints.up("lg")]: {
       right: "calc(-100vw + 325px)",
     },
