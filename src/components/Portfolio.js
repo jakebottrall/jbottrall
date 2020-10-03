@@ -1,30 +1,80 @@
 import React from "react";
 
-import { Typography } from "@material-ui/core/";
+import { Tab, Tabs, Typography } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
 
-export default function Landing(props) {
+import { data } from "../data/portfolio";
+import PortfolioItem from "./PortfolioItem";
+
+function a11yProps(index) {
+  return {
+    id: `tab-${index}`,
+    "aria-controls": `tabpanel-${index}`,
+  };
+}
+
+export default function Portfolio() {
   const classes = useStyles();
+  const [width, setWidth] = React.useState(window.innerWidth);
+  const [value, setValue] = React.useState(0);
+
+  const updateWidth = () => {
+    setWidth(window.innerWidth);
+  };
+
+  window.addEventListener("resize", updateWidth, true);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
-    <main className={classes.main}>
-      <Typography
-        variant="h1"
-        align="center"
-        component="h1"
-        className={classes.title}
-      >
-        Portfolio
-      </Typography>
-    </main>
+    <React.Fragment>
+      <div className={classes.titleContainer}>
+        <Typography component="h2" variant="h2">
+          Portfolio
+        </Typography>
+      </div>
+      <div className={classes.tabsWrapper}>
+        <Tabs
+          value={value}
+          variant="scrollable"
+          orientation={width > 960 ? "vertical" : "horizontal"}
+          onChange={handleChange}
+          className={classes.tabs}
+          indicatorColor="primary"
+        >
+          {data.map((x, i) => (
+            <Tab key={i} label={x.title} {...a11yProps(i)} />
+          ))}
+        </Tabs>
+        {data.map((x, i) => (
+          <PortfolioItem item={x} key={i} value={value} index={i} />
+        ))}
+      </div>
+    </React.Fragment>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
-  main: {
-    zIndex: 100,
-    width: "100vw",
+  titleContainer: {
+    width: "100%",
     display: "flex",
-    height: "100vh",
-    overflow: "hidden",
+    justifyContent: "center",
+    marginTop: 25,
+    height: 72,
+  },
+  tabsWrapper: {
+    flexGrow: 1,
+    display: "flex",
+    flexDirection: "column",
+    [theme.breakpoints.up("md")]: {
+      paddingTop: 65,
+      flexDirection: "row",
+    },
+  },
+  tabs: {
+    minWidth: 200,
+    borderRight: `1px solid ${theme.palette.divider}`,
   },
 }));
