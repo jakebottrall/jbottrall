@@ -9,25 +9,42 @@ import Boat from "../img/boat.png";
 export default function Home(props) {
   const classes = useStyles();
 
+  const { boatLoaded, bgLoaded, setBGLoaded, setBoatLoaded } = props;
+
   const [slideBackground, setSlideBackground] = React.useState(false);
   const [rollBackground, setRollBackground] = React.useState(false);
   const [slideBoat, setSlideBoat] = React.useState(false);
 
-  setTimeout(() => {
-    setSlideBackground(true);
-  }, 1);
+  if (!bgLoaded) {
+    const img = new Image();
 
-  setTimeout(() => {
-    setSlideBoat(true);
-  }, 1000);
+    img.onload = () => {
+      setBGLoaded(true);
+    };
 
-  setTimeout(() => {
-    setRollBackground(true);
-  }, 1000);
+    img.src = BG;
+
+    if (img.complete) {
+      img.onload();
+    }
+  } else if (bgLoaded && boatLoaded) {
+    setTimeout(() => {
+      setSlideBackground(true);
+    }, 1);
+
+    setTimeout(() => {
+      setSlideBoat(true);
+    }, 1000);
+
+    setTimeout(() => {
+      setRollBackground(true);
+    }, 1000);
+  }
 
   return (
     <React.Fragment>
       <div
+        id="bg"
         className={clsx({
           [classes.bg]: true,
           [classes.slideBackground]: slideBackground,
@@ -38,6 +55,7 @@ export default function Home(props) {
         <img
           src={Boat}
           alt="boat"
+          onLoad={() => setBoatLoaded(true)}
           className={clsx({
             [classes.boat]: true,
             [classes.slideBoat]: slideBoat,

@@ -52,12 +52,12 @@ export const data = [
           <Link href="https://argusvision.com.au" taget="_blank">
             Argus Vision
           </Link>
-          . The original stack was Bootstrap, EJS, Node.js and MongoDB. Since
-          then the frontend has been overhauled with React and Material-UI.
+          . The original stack was Bootstrap, EJS, Node.js and MongoDB. In early
+          2019 the frontend was redeveloped with React and Material-UI.
           <br />
           <br />
-          Since it's creation features to manage projects, budgets, employee
-          time tracking and inventory have been added whilst expanding on the
+          Since it's creation, features to manage projects, budgets, employee
+          time tracking and inventory have been added, whilst expanding on the
           original incoming/outgoing feature set.
           <br />
           <br />
@@ -84,8 +84,8 @@ export const data = [
           <Link href="https://argusvision.com.au" taget="_blank">
             Argus Vision (Aus) Pty Ltd{" "}
           </Link>
-          is a window manufacturer on the Gold Coast, Australi. I've had the
-          pleasure of working with Argus for a nunber of years now. This is
+          is a window manufacturer on the Gold Coast, Australia. I've had the
+          pleasure of working with Argus for a number of years now. This is
           their public website developed with a custom ghost handlebars theme.
         </span>
       );
@@ -110,8 +110,8 @@ export const data = [
           </Link>
           commisioned me to develop a basic CRM tool. The idea being that
           everything on the market didn't function the way the CEO wanted it to.
-          The original stack was Bootstrap, EJS, Node.js and MongoDB. Since then
-          the frontend has been overhauled with React and Materialize.
+          The original stack was Bootstrap, EJS, Node.js and MongoDB. In early
+          2019 the frontend was redeveloped with React and Materialize.
           <br />
           <br />
           Late 2019
@@ -122,8 +122,6 @@ export const data = [
           commisioned me to add a component named "Logbot" which tracks
           personnel and students comings and goings at their campuses, for
           government compliance.
-          <br />
-          <br />
         </span>
       );
     },
@@ -227,8 +225,9 @@ export const data = [
             Summit Seekers{" "}
           </Link>
           is a personal training business on the Gold Coast, Australia. Their
-          focus is to help people achieve their fitness goals. This is their
-          public website developed with a custom ghost handlebars theme.
+          focus is to help people achieve their fitness goals, with an emphasis
+          on hiking/trekking. This is their public website developed with a
+          custom ghost handlebars theme.
         </span>
       );
     },

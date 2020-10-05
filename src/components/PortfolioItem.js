@@ -14,7 +14,7 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import OpenInNewSharpIcon from "@material-ui/icons/OpenInNewSharp";
 
 export default function PortfolioItem(props) {
-  const { item, index, value } = props;
+  const { item, index, value, handleImgLoad, imgLoaded } = props;
   const classes = useStyles();
 
   return (
@@ -29,9 +29,11 @@ export default function PortfolioItem(props) {
           <Grid item sm={12} md={6}>
             <Link href={item.url} target="_blank">
               <img
-                className={classes.screenshot}
-                src={item.screenshot}
                 alt={item.title}
+                src={item.screenshot}
+                style={imgLoaded >= index ? {} : { visibility: "hidden" }}
+                className={classes.screenshot}
+                onLoad={() => handleImgLoad()}
               />
             </Link>
           </Grid>
@@ -67,7 +69,7 @@ export default function PortfolioItem(props) {
             <div className={classes.stackWrapper}>
               {item.stack.map((x, i) => (
                 <Tooltip key={i} title={x.name}>
-                  <img className={classes.svg} src={x.logo} alt={x.name} />
+                  <img src={x.logo} alt={x.name} className={classes.svg} />
                 </Tooltip>
               ))}
             </div>

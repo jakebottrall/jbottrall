@@ -1,9 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import { Tab, Tabs, Typography } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { data } from "../data/portfolio";
+import { setLoader } from "../store/actions/loader";
 import PortfolioItem from "./PortfolioItem";
 
 function a11yProps(index) {
@@ -13,56 +15,92 @@ function a11yProps(index) {
   };
 }
 
-export default function Portfolio() {
-  const classes = useStyles();
-  const [width, setWidth] = React.useState(window.innerWidth);
-  const [value, setValue] = React.useState(0);
+class Portfolio extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 0,
+      imgLoaded: 0,
+      width: window.innerWidth,
+    };
+  }
 
-  const updateWidth = () => {
-    setWidth(window.innerWidth);
+  componentDidMount() {
+    const { setLoader } = this.props;
+    setLoader(true);
+    window.addEventListener("resize", this.updateWidth, true);
+  }
+
+  componentDidUpdate() {
+    const { imgLoaded } = this.state;
+    const { setLoader } = this.props;
+    if (imgLoaded < data.length) {
+      setLoader(true);
+    } else {
+      setLoader(false);
+    }
+  }
+
+  updateWidth = () => {
+    this.setState({ width: window.innerWidth });
   };
 
-  window.addEventListener("resize", updateWidth, true);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  handleTabs = (e, value) => {
+    e.preventDefault();
+    this.setState({ value });
   };
 
-  return (
-    <React.Fragment>
-      <div className={classes.titleContainer}>
-        <Typography component="h2" variant="h2">
-          Portfolio
-        </Typography>
-      </div>
-      <div className={classes.tabsWrapper}>
-        <Tabs
-          value={value}
-          variant="scrollable"
-          orientation={width > 960 ? "vertical" : "horizontal"}
-          onChange={handleChange}
-          className={classes.tabs}
-          indicatorColor="primary"
-        >
+  handleImgLoad = () => {
+    this.setState({ imgLoaded: this.state.imgLoaded + 1 });
+  };
+
+  render() {
+    const { classes } = this.props;
+    const { width, value, imgLoaded } = this.state;
+
+    return (
+      <React.Fragment>
+        <div className={classes.titleContainer}>
+          <Typography component="h2" variant="h2">
+            Portfolio
+          </Typography>
+        </div>
+        <div className={classes.tabsWrapper}>
+          <Tabs
+            value={value}
+            variant="scrollable"
+            className={classes.tabs}
+            indicatorColor="primary"
+            onChange={this.handleTabs}
+            orientation={width > 960 ? "vertical" : "horizontal"}
+          >
+            {data.map((x, i) => (
+              <Tab key={i} label={x.title} {...a11yProps(i)} />
+            ))}
+          </Tabs>
           {data.map((x, i) => (
-            <Tab key={i} label={x.title} {...a11yProps(i)} />
+            <PortfolioItem
+              key={i}
+              item={x}
+              index={i}
+              value={value}
+              imgLoaded={imgLoaded}
+              handleImgLoad={this.handleImgLoad}
+            />
           ))}
-        </Tabs>
-        {data.map((x, i) => (
-          <PortfolioItem item={x} key={i} value={value} index={i} />
-        ))}
-      </div>
-    </React.Fragment>
-  );
+        </div>
+      </React.Fragment>
+    );
+  }
 }
 
 const useStyles = makeStyles((theme) => ({
   titleContainer: {
+    height: 72,
     width: "100%",
+    marginTop: 25,
     display: "flex",
     justifyContent: "center",
-    marginTop: 25,
-    height: 72,
   },
   tabsWrapper: {
     flexGrow: 1,
@@ -78,3 +116,13 @@ const useStyles = makeStyles((theme) => ({
     borderRight: `1px solid ${theme.palette.divider}`,
   },
 }));
+
+function StyledWrapper(props) {
+  const classes = useStyles();
+
+  return <Portfolio {...props} classes={classes} />;
+}
+
+export default connect(null, {
+  setLoader,
+})(StyledWrapper);
