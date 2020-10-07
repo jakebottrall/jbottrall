@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import {
@@ -19,7 +19,12 @@ const baseUrl =
     ? "http://localhost:3000/"
     : "https://jakebottrall.com";
 
-const defaultState = {
+const contactUrl =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:2000/ghost-contact"
+    : "https://jakebottrall.com/ghost-contact";
+
+const defaultForm = {
   baseUrl,
   name: "",
   email: "",
@@ -30,57 +35,39 @@ const defaultState = {
   reCaptcha: { secretKey: "JAKE_BOTTRALL_SECRET_KEY" },
 };
 
-class Contact extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = defaultState;
-  }
-  handleChange = (e) => {
-    const target = e.target;
-    const name = target.name;
-    const value = target.type === "checkbox" ? target.checked : target.value;
+function Contact(props) {
+  const [form, setForm] = useState(defaultForm);
 
-    this.setState({
-      [name]: value,
+  const handleChange = (e) => {
+    e.preventDefault();
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
     });
   };
 
-  handleSubmit = async (e) => {
-    const { addSnackbar, setLoader, history } = this.props;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { addSnackbar, setLoader, history } = props;
     try {
       setLoader(true);
-      e.preventDefault();
 
-      const contactUrl =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:2000/ghost-contact"
-          : "https://jakebottrall.com/ghost-contact";
+      const data = { ...form };
 
-      const data = { ...this.state };
-
-      console.log(data);
-
-      data.reCaptcha.token = await this.validateCaptcha();
+      data.reCaptcha.token = await validateCaptcha();
 
       await apiCall("post", contactUrl, data);
       addSnackbar({ message: "Message succefully sent" }, "success");
-      this.setState(defaultState);
+      setForm(defaultForm);
       history.push("/");
     } catch (error) {
-      console.log(error);
-      addSnackbar(
-        {
-          message:
-            "Oops! Something went wrong. Please refresh the browser and try again.",
-        },
-        "error"
-      );
+      addSnackbar({ message: "Oops! Something went wrong" }, "error");
     } finally {
       setLoader(false);
     }
   };
 
-  validateCaptcha = () => {
+  const validateCaptcha = () => {
     return new Promise((res, rej) => {
       window.grecaptcha.ready(() => {
         window.grecaptcha
@@ -94,77 +81,75 @@ class Contact extends React.Component {
     });
   };
 
-  render() {
-    const { classes } = this.props;
-    return (
-      <Container className={classes.root} maxWidth="sm">
-        <form className={classes.form} onSubmit={this.handleSubmit}>
-          <Typography variant="h4">Get in Touch</Typography>
+  const classes = useStyles();
+  return (
+    <Container className={classes.root} maxWidth="sm">
+      <form className={classes.form} onSubmit={handleSubmit}>
+        <Typography variant="h4">Get in Touch</Typography>
 
-          <TextField
-            required
-            fullWidth
-            autoFocus
-            name="name"
-            label="Name"
-            margin="normal"
-            variant="outlined"
-            autoComplete="name"
-            value={this.state.name}
-            onChange={this.handleChange}
-          />
+        <TextField
+          required
+          fullWidth
+          autoFocus
+          name="name"
+          label="Name"
+          margin="normal"
+          value={form.name}
+          variant="outlined"
+          autoComplete="name"
+          onChange={handleChange}
+        />
 
-          <TextField
-            required
-            fullWidth
-            name="email"
-            type="email"
-            label="Email"
-            margin="normal"
-            variant="outlined"
-            autoComplete="email"
-            value={this.state.email}
-            onChange={this.handleChange}
-          />
+        <TextField
+          required
+          fullWidth
+          name="email"
+          type="email"
+          label="Email"
+          margin="normal"
+          variant="outlined"
+          value={form.email}
+          autoComplete="email"
+          onChange={handleChange}
+        />
 
-          <TextField
-            required
-            fullWidth
-            multiline
-            name="message"
-            rows={5}
-            label="Message"
-            margin="normal"
-            variant="outlined"
-            value={this.state.message}
-            onChange={this.handleChange}
-          />
+        <TextField
+          required
+          rows={5}
+          fullWidth
+          multiline
+          name="message"
+          label="Message"
+          margin="normal"
+          variant="outlined"
+          value={form.message}
+          onChange={handleChange}
+        />
 
-          <Button
-            type="submit"
-            color="primary"
-            variant="outlined"
-            className={classes.button}
-          >
-            Submit
-          </Button>
-        </form>
-        <Typography component="p" colour="textSecondary" variant="caption">
-          This site is protected by reCAPTCHA and the Google
-          <Link href="https://policies.google.com/privacy" target="_blank">
-            {" "}
-            Privacy Policy{" "}
-          </Link>
-          and
-          <Link href="https://policies.google.com/terms" target="_blank">
-            {" "}
-            Terms of Service{" "}
-          </Link>
-          apply.
-        </Typography>
-      </Container>
-    );
-  }
+        <Button
+          type="submit"
+          color="primary"
+          variant="outlined"
+          className={classes.button}
+        >
+          Submit
+        </Button>
+      </form>
+      <Typography component="p" colour="textSecondary" variant="caption">
+        This site is protected by reCAPTCHA and the Google
+        <Link href="https://policies.google.com/privacy" target="_blank">
+          {" "}
+          Privacy Policy{" "}
+        </Link>
+        and
+        <Link href="https://policies.google.com/terms" target="_blank">
+          {" "}
+          Terms of Service{" "}
+        </Link>
+        apply.
+      </Typography>
+    </Container>
+  );
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -179,12 +164,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function StyledWrapper(props) {
-  const classes = useStyles();
-  return <Contact {...props} classes={classes} />;
-}
-
 export default connect(null, {
   setLoader,
   addSnackbar,
-})(StyledWrapper);
+})(Contact);
