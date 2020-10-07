@@ -5,29 +5,16 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import BG from "../img/background.png";
 import Boat from "../img/boat.png";
+import useBackgroundStatus from "./Hooks/useBackgroundStatus";
 
 export default function Home(props) {
   const classes = useStyles();
-
-  const { boatLoaded, bgLoaded, setBGLoaded, setBoatLoaded } = props;
-
+  const backgroundStatus = useBackgroundStatus();
   const [slideBackground, setSlideBackground] = React.useState(false);
   const [rollBackground, setRollBackground] = React.useState(false);
   const [slideBoat, setSlideBoat] = React.useState(false);
 
-  if (!bgLoaded) {
-    const img = new Image();
-
-    img.onload = () => {
-      setBGLoaded(true);
-    };
-
-    img.src = BG;
-
-    if (img.complete) {
-      img.onload();
-    }
-  } else if (bgLoaded && boatLoaded) {
+  if (backgroundStatus) {
     setTimeout(() => {
       setSlideBackground(true);
     }, 1);
@@ -40,7 +27,6 @@ export default function Home(props) {
       setRollBackground(true);
     }, 1000);
   }
-
   return (
     <React.Fragment>
       <div
@@ -55,7 +41,6 @@ export default function Home(props) {
         <img
           src={Boat}
           alt="boat"
-          onLoad={() => setBoatLoaded(true)}
           className={clsx({
             [classes.boat]: true,
             [classes.slideBoat]: slideBoat,
