@@ -151,10 +151,13 @@ const useStyles = makeStyles((theme) => ({
   },
   svg: {
     padding: 5,
-    marginBottom: 5,
     height: "5em",
+    marginBottom: 5,
     [theme.breakpoints.up("md")]: {
       backgroundColor: "rgba(255, 255, 255, 0.45)",
+      "&:hover": {
+        backgroundColor: "rgba(255, 255, 255, 0.25)",
+      },
     },
   },
 }));
