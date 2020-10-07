@@ -127,6 +127,7 @@ const useStyles = makeStyles((theme) => ({
     height: "auto",
     maxWidth: "100%",
     border: "5px solid white",
+    transition: "opacity 0.5s ease",
   },
   imgLoaded: {
     opacity: 1,
