@@ -48,7 +48,7 @@ export default function PortfolioItem(props) {
             </div>
           </Link>
         </Grid>
-        <Grid item sm={12} md={6}>
+        <Grid item sm={12} md={6} className={classes.content}>
           <Typography
             className={classes.title}
             align="center"
@@ -98,8 +98,8 @@ export default function PortfolioItem(props) {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "none",
     width: "100%",
+    display: "none",
     maxWidth: "100%",
     overflowY: "scroll",
     height: "calc(100vh - 25px - 72px - 48px)",
@@ -132,6 +132,9 @@ const useStyles = makeStyles((theme) => ({
   imgLoaded: {
     opacity: 1,
   },
+  content: {
+    maxWidth: "100%",
+  },
   stackWrapper: {
     width: "100%",
     paddingTop: 50,
@@ -141,6 +144,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-around",
   },
   title: {
+    maxWidth: "100%",
     overflow: "hidden",
     textOverflow: "ellipsis",
   },

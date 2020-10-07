@@ -34,7 +34,6 @@ export const theme = createMuiTheme({
     MuiIconButton: {
       root: {
         "&:hover": {
-          backgroundColor: "transparent",
           color: "#9656ae",
         },
       },
