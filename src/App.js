@@ -18,26 +18,19 @@ console.log(`jakebottrall.com v ${packageJSON.version}`);
 export default function App() {
   return (
     <Fragment>
-      {/* establish css baseline */}
-      <CssBaseline />
-      {/* redux wrapper */}
       <Provider store={store}>
-        {/* Router Wrapper */}
         <Router>
-          {/* Material theme wrapper */}
           <ThemeProvider theme={theme}>
-            {/* Snackbar wrapper */}
             <SnackbarProvider
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "right",
               }}
             >
-              {/* feedback component */}
+              <CssBaseline />
+
               <Loader />
               <Notifier />
-
-              {/* Main component */}
               <Main />
             </SnackbarProvider>
           </ThemeProvider>
