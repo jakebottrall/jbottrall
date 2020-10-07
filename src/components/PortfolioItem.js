@@ -1,8 +1,10 @@
-import React from "react";
+import clsx from "clsx";
+import React, { useState } from "react";
 
 import {
   Box,
   Button,
+  CircularProgress,
   Grid,
   IconButton,
   Link,
@@ -14,31 +16,44 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import OpenInNewSharpIcon from "@material-ui/icons/OpenInNewSharp";
 
 export default function PortfolioItem(props) {
-  const { item, index, value, handleImgLoad, imgLoaded } = props;
+  const { item, index, tab } = props;
   const classes = useStyles();
+  const [imgLoaded, setImgLoaded] = useState(false);
 
   return (
     <div
       role="tabpanel"
-      hidden={value !== index}
+      hidden={tab !== index}
       id={`tabpanel-${index}`}
+      style={{ width: "100%" }}
       aria-labelledby={`tab-${index}`}
     >
       <Box p={3} className={classes.root}>
         <Grid container spacing={3}>
           <Grid item sm={12} md={6}>
             <Link href={item.url} target="_blank">
-              <img
-                alt={item.title}
-                src={item.screenshot}
-                style={imgLoaded >= index ? {} : { visibility: "hidden" }}
-                className={classes.screenshot}
-                onLoad={() => handleImgLoad()}
-              />
+              <div className={classes.imgContainer}>
+                <img
+                  alt={item.title}
+                  src={item.screenshot}
+                  onLoad={() => setImgLoaded(true)}
+                  className={clsx({
+                    [classes.screenshot]: true,
+                    [classes.imgLoaded]: imgLoaded,
+                  })}
+                />
+                {!imgLoaded && <CircularProgress className={classes.loader} />}
+              </div>
             </Link>
           </Grid>
           <Grid item sm={12} md={6}>
-            <Typography align="center" component="h3" variant="h3" gutterBottom>
+            <Typography
+              className={classes.title}
+              align="center"
+              component="h3"
+              variant="h3"
+              gutterBottom
+            >
               {item.title}
               <IconButton
                 href={item.url}
@@ -92,10 +107,24 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "transparent",
     },
   },
-  screenshot: {
-    maxWidth: "100%",
+  imgContainer: {
     height: "auto",
+    textAlign: "center",
+    position: "relative",
+  },
+  loader: {
+    top: "50%",
+    left: "50%",
+    position: "absolute",
+  },
+  screenshot: {
+    opacity: 0,
+    height: "auto",
+    maxWidth: "100%",
     border: "15px solid white",
+  },
+  imgLoaded: {
+    opacity: 1,
   },
   stackWrapper: {
     width: "100%",
@@ -104,6 +133,10 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
     alignItems: "center",
     justifyContent: "space-around",
+  },
+  title: {
+    overflow: "hidden",
+    textOverflow: "ellipsis",
   },
   svg: {
     padding: 5,
