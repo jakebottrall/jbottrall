@@ -1,7 +1,8 @@
 import React from "react";
 
-import { IconButton, Tooltip, Zoom } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
+import { IconButton, Zoom } from "@material-ui/core";
+
+import { LightTooltip } from "./Feedback/Tooltips";
 
 export default function NavItem(props) {
   const { item } = props;
@@ -23,12 +24,3 @@ export default function NavItem(props) {
     </Zoom>
   );
 }
-
-const LightTooltip = withStyles((theme) => ({
-  tooltip: {
-    backgroundColor: theme.palette.primary.light,
-    color: theme.palette.primary.contrastText,
-    borderRadius: 0,
-    fontWeight: 900,
-  },
-}))(Tooltip);

@@ -8,12 +8,13 @@ import {
   Grid,
   IconButton,
   Link,
-  Tooltip,
   Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import OpenInNewSharpIcon from "@material-ui/icons/OpenInNewSharp";
+
+import { LightTooltip } from "./Feedback/Tooltips";
 
 export default function PortfolioItem(props) {
   const { item, index, tab } = props;
@@ -50,11 +51,11 @@ export default function PortfolioItem(props) {
         </Grid>
         <Grid item sm={12} md={6} className={classes.content}>
           <Typography
-            className={classes.title}
-            align="center"
-            component="h3"
             variant="h3"
             gutterBottom
+            align="center"
+            component="h3"
+            className={classes.title}
           >
             {item.title}
             <IconButton
@@ -70,10 +71,10 @@ export default function PortfolioItem(props) {
               rel="noopener"
               target="_blank"
               component={Link}
+              underline="none"
               color="secondary"
               href={item.github}
               variant="outlined"
-              underline="none"
               startIcon={<GitHubIcon />}
               disabled={!item.github ? true : false}
             >
@@ -85,9 +86,9 @@ export default function PortfolioItem(props) {
           <div>{item.description()}</div>
           <div className={classes.stackWrapper}>
             {item.stack.map((x, i) => (
-              <Tooltip key={i} title={x.name}>
+              <LightTooltip key={i} title={x.name}>
                 <img src={x.logo} alt={x.name} className={classes.svg} />
-              </Tooltip>
+              </LightTooltip>
             ))}
           </div>
         </Grid>

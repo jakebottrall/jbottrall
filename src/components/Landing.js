@@ -11,61 +11,62 @@ import WebSharpIcon from "@material-ui/icons/WebSharp";
 
 import NavItem from "./NavItem";
 
+const navItems = [
+  {
+    delay: "200ms",
+    component: Link,
+    type: "external",
+    title: "Follow me on twitter",
+    href: "https://twitter.com/jakebottrall",
+    Icon: () => {
+      return <TwitterIcon fontSize="large" />;
+    },
+  },
+  {
+    delay: "300ms",
+    component: Link,
+    type: "external",
+    title: "Connect on LinkedIn",
+    href: "https://www.linkedin.com/in/jake-bottrall-77ab31169/",
+    Icon: () => {
+      return <LinkedInIcon fontSize="large" />;
+    },
+  },
+  {
+    delay: "400ms",
+    component: Link,
+    type: "external",
+    title: "Check out my projects on GitHub",
+    href: "https://github.com/jakebottrall",
+    Icon: () => {
+      return <GitHubIcon fontSize="large" />;
+    },
+  },
+  {
+    delay: "500ms",
+    to: "/portfolio",
+    type: "internal",
+    component: RouterLink,
+    title: "My Portfolio",
+    Icon: () => {
+      return <WebSharpIcon fontSize="large" />;
+    },
+  },
+  {
+    delay: "600ms",
+    to: "/contact",
+    type: "internal",
+    component: RouterLink,
+    title: "Get in touch",
+    Icon: () => {
+      return <EmailSharpIcon fontSize="large" />;
+    },
+  },
+];
+
 export default function Landing() {
   const classes = useStyles();
   const bullet = <span className={classes.bullet}>•</span>;
-  const navItems = [
-    {
-      delay: "200ms",
-      component: Link,
-      type: "external",
-      title: "Follow me on twitter",
-      href: "https://twitter.com/jakebottrall",
-      Icon: () => {
-        return <TwitterIcon fontSize="large" />;
-      },
-    },
-    {
-      delay: "300ms",
-      component: Link,
-      type: "external",
-      title: "Connect on LinkedIn",
-      href: "https://www.linkedin.com/in/jake-bottrall-77ab31169/",
-      Icon: () => {
-        return <LinkedInIcon fontSize="large" />;
-      },
-    },
-    {
-      delay: "400ms",
-      component: Link,
-      type: "external",
-      title: "Check out my projects on GitHub",
-      href: "https://github.com/jakebottrall",
-      Icon: () => {
-        return <GitHubIcon fontSize="large" />;
-      },
-    },
-    {
-      delay: "500ms",
-      to: "/portfolio",
-      type: "internal",
-      component: RouterLink,
-      title: "My Portfolio",
-      Icon: () => {
-        return <WebSharpIcon fontSize="large" />;
-      },
-    },
-    {
-      delay: "600ms",
-      to: "/contact",
-      type: "internal",
-      component: RouterLink,
-      title: "Get in touch",
-      Icon: () => {
-        return <EmailSharpIcon fontSize="large" />;
-      },
-    },
-  ];
   return (
     <main className={classes.main}>
       <Container maxWidth="sm">
