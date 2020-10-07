@@ -7,6 +7,8 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 export default function BackButton(props) {
   const classes = useStyles();
+
+  // display back button only if the current location is not the landing page
   if (props.location.pathname !== "/") {
     return (
       <IconButton className={classes.root} component={Link} to="/">

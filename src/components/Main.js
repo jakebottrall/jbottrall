@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Route, Switch, withRouter } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
@@ -22,9 +22,11 @@ const routes = [
 function Main(props) {
   const { setLoader } = props;
 
+  // check if background assets have loaded
   const backgroundStatus = useBackgroundStatus();
 
-  React.useEffect(() => {
+  // set redux loader based on background assets
+  useEffect(() => {
     if (!backgroundStatus) {
       setLoader(true);
     } else {
@@ -36,12 +38,13 @@ function Main(props) {
   return (
     <div className={classes.root}>
       <Background />
+      {/* Wait for background assets to load before displaying pages */}
       {backgroundStatus && (
         <TransitionGroup className="transition-group">
           <CSSTransition
+            classNames="slide"
             key={props.location.key}
             timeout={{ enter: 500, exit: 500 }}
-            classNames="slide"
           >
             <div className={classes.wrapper}>
               <BackButton {...props} />

@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React from "react";
+import React, { Fragment, useState } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -7,28 +7,33 @@ import BG from "../img/background.png";
 import Boat from "../img/boat.png";
 import useBackgroundStatus from "./Hooks/useBackgroundStatus";
 
-export default function Home(props) {
+export default function Home() {
   const classes = useStyles();
-  const backgroundStatus = useBackgroundStatus();
-  const [slideBackground, setSlideBackground] = React.useState(false);
-  const [rollBackground, setRollBackground] = React.useState(false);
-  const [slideBoat, setSlideBoat] = React.useState(false);
 
+  const backgroundStatus = useBackgroundStatus();
+  const [slideBackground, setSlideBackground] = useState(false);
+  const [rollBackground, setRollBackground] = useState(false);
+  const [slideBoat, setSlideBoat] = useState(false);
+
+  // if both background assets have loaded initiate animations
   if (backgroundStatus) {
+    // Slide the background up once
     setTimeout(() => {
       setSlideBackground(true);
     }, 1);
 
+    // slide the boat left once
     setTimeout(() => {
       setSlideBoat(true);
     }, 1000);
 
+    // roll the background infinitely
     setTimeout(() => {
       setRollBackground(true);
     }, 1000);
   }
   return (
-    <React.Fragment>
+    <Fragment>
       <div
         id="bg"
         className={clsx({
@@ -47,7 +52,7 @@ export default function Home(props) {
           })}
         />
       </div>
-    </React.Fragment>
+    </Fragment>
   );
 }
 

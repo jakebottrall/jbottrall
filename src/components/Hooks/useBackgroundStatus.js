@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import BackgroundImage from "../../img/background.png";
 import BoatImage from "../../img/boat.png";
 
-export default function useBackgroundStatus(props) {
+export default function useBackgroundStatus() {
   const [status, setStatus] = useState(false);
   const [backgroundLoaded, setBackgroundLoaded] = useState(false);
   const [boatLoaded, setBoatLoaded] = useState(false);
 
+  // check to see if the background image has loaded
   useEffect(() => {
     if (!backgroundLoaded) {
       const background = new Image();
@@ -23,6 +24,7 @@ export default function useBackgroundStatus(props) {
     }
   });
 
+  // check to see if the boat image has loaded
   useEffect(() => {
     if (!boatLoaded) {
       const boat = new Image();
@@ -38,6 +40,7 @@ export default function useBackgroundStatus(props) {
     }
   });
 
+  // if both assets have loaded update status
   useEffect(() => {
     if (boatLoaded && backgroundLoaded) {
       setStatus(true);

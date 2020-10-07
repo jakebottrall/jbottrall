@@ -1,5 +1,5 @@
 import { useSnackbar } from "notistack";
-import React from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { removeSnackbar } from "../../store/actions/snackbars";
@@ -21,7 +21,7 @@ const Notifier = () => {
     displayed = [...displayed.filter((key) => id !== key)];
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     notifications.forEach(
       ({ key, message, options = {}, dismissed = false }) => {
         if (dismissed) {
@@ -43,7 +43,7 @@ const Notifier = () => {
             }
           },
           onExited: (event, myKey) => {
-            // removen this snackbar from redux store
+            // remove this snackbar from redux store
             dispatch(removeSnackbar(myKey));
             removeDisplayed(myKey);
           },

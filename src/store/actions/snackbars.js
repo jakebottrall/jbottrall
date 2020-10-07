@@ -5,7 +5,6 @@ import {
 } from "../actionTypes";
 
 export const addSnackbar = (event, variant, options) => {
-  console.log(event);
   const defaultOptions = {
     variant,
     autoHideDuration: 3000,

@@ -1,14 +1,7 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 
-import {
-  Container,
-  IconButton,
-  Link,
-  Tooltip,
-  Typography,
-  Zoom,
-} from "@material-ui/core/";
+import { Container, Link, Typography } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
 import EmailSharpIcon from "@material-ui/icons/EmailSharp";
 import GitHubIcon from "@material-ui/icons/GitHub";
@@ -16,9 +9,63 @@ import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import WebSharpIcon from "@material-ui/icons/WebSharp";
 
-export default function Landing(props) {
+import NavItem from "./NavItem";
+
+export default function Landing() {
   const classes = useStyles();
   const bullet = <span className={classes.bullet}>•</span>;
+  const navItems = [
+    {
+      delay: "200ms",
+      component: Link,
+      type: "external",
+      title: "Follow me on twitter",
+      href: "https://twitter.com/jakebottrall",
+      Icon: () => {
+        return <TwitterIcon fontSize="large" />;
+      },
+    },
+    {
+      delay: "300ms",
+      component: Link,
+      type: "external",
+      title: "Connect on LinkedIn",
+      href: "https://www.linkedin.com/in/jake-bottrall-77ab31169/",
+      Icon: () => {
+        return <LinkedInIcon fontSize="large" />;
+      },
+    },
+    {
+      delay: "400ms",
+      component: Link,
+      type: "external",
+      title: "Check out my projects on GitHub",
+      href: "https://github.com/jakebottrall",
+      Icon: () => {
+        return <GitHubIcon fontSize="large" />;
+      },
+    },
+    {
+      delay: "500ms",
+      to: "/portfolio",
+      type: "internal",
+      component: RouterLink,
+      title: "My Portfolio",
+      Icon: () => {
+        return <WebSharpIcon fontSize="large" />;
+      },
+    },
+    {
+      delay: "600ms",
+      to: "/contact",
+      type: "internal",
+      component: RouterLink,
+      title: "Get in touch",
+      Icon: () => {
+        return <EmailSharpIcon fontSize="large" />;
+      },
+    },
+  ];
   return (
     <main className={classes.main}>
       <Container maxWidth="sm">
@@ -39,53 +86,9 @@ export default function Landing(props) {
           Web Dev {bullet} Tech Enthusiast {bullet} Decent Bloke
         </Typography>
         <nav className={classes.nav}>
-          <Tooltip TransitionComponent={Zoom} title="Follow me on twitter">
-            <IconButton
-              rel="noopener"
-              target="_blank"
-              component={Link}
-              href="https://twitter.com/jakebottrall"
-            >
-              <TwitterIcon fontSize="large" />
-            </IconButton>
-          </Tooltip>
-          <Tooltip TransitionComponent={Zoom} title="Connect on LinkedIn">
-            <IconButton
-              rel="noopener"
-              target="_blank"
-              component={Link}
-              href="https://www.linkedin.com/in/jake-bottrall-77ab31169/"
-            >
-              <LinkedInIcon fontSize="large" />
-            </IconButton>
-          </Tooltip>
-          <Tooltip
-            TransitionComponent={Zoom}
-            title="Check out my projects on GitHub"
-          >
-            <IconButton
-              rel="noopener"
-              target="_blank"
-              component={Link}
-              href="https://github.com/jakebottrall"
-            >
-              <GitHubIcon fontSize="large" />
-            </IconButton>
-          </Tooltip>
-          <Tooltip TransitionComponent={Zoom} title="My Portfolio">
-            <IconButton>
-              <Link component={RouterLink} to="/portfolio">
-                <WebSharpIcon fontSize="large" />
-              </Link>
-            </IconButton>
-          </Tooltip>
-          <Tooltip TransitionComponent={Zoom} title="Get in touch">
-            <IconButton>
-              <Link component={RouterLink} to="/contact">
-                <EmailSharpIcon fontSize="large" />
-              </Link>
-            </IconButton>
-          </Tooltip>
+          {navItems.map((item, i) => (
+            <NavItem key={i} item={item} />
+          ))}
         </nav>
       </Container>
     </main>
@@ -118,5 +121,11 @@ const useStyles = makeStyles((theme) => ({
     display: "inline-block",
     margin: "0 2px",
     transform: "scale(0.8)",
+  },
+  tooltip: {
+    backgroundColor: theme.palette.common.white,
+    color: "rgba(0, 0, 0, 0.87)",
+    boxShadow: theme.shadows[1],
+    fontSize: 11,
   },
 }));

@@ -126,7 +126,7 @@ const useStyles = makeStyles((theme) => ({
     opacity: 0,
     height: "auto",
     maxWidth: "100%",
-    border: "15px solid white",
+    border: "5px solid white",
   },
   imgLoaded: {
     opacity: 1,
@@ -146,7 +146,6 @@ const useStyles = makeStyles((theme) => ({
   svg: {
     padding: 5,
     marginBottom: 5,
-    borderRadius: 15,
     height: "5em",
     [theme.breakpoints.up("md")]: {
       backgroundColor: "rgba(255, 255, 255, 0.45)",

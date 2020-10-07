@@ -14,6 +14,7 @@ import { apiCall } from "../services/api";
 import { setLoader } from "../store/actions/loader";
 import { addSnackbar } from "../store/actions/snackbars";
 
+// configure contact form urls based on environment
 const baseUrl =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000/"
@@ -24,6 +25,7 @@ const contactUrl =
     ? "http://localhost:2000/ghost-contact"
     : "https://jakebottrall.com/ghost-contact";
 
+// define default form state
 const defaultForm = {
   baseUrl,
   name: "",
@@ -50,19 +52,27 @@ function Contact(props) {
     e.preventDefault();
     const { addSnackbar, setLoader, history } = props;
     try {
+      // engage redux loader
       setLoader(true);
 
+      // grab form data
       const data = { ...form };
 
+      // validate reCaptcha
       data.reCaptcha.token = await validateCaptcha();
 
+      // post form to ghost-contact
       await apiCall("post", contactUrl, data);
+
+      // if successful notify user, reset form and go back to landing page
       addSnackbar({ message: "Message succefully sent" }, "success");
       setForm(defaultForm);
       history.push("/");
     } catch (error) {
+      // if unsuccessful display error message
       addSnackbar({ message: "Oops! Something went wrong" }, "error");
     } finally {
+      // disengage redux loader no matter what outcome
       setLoader(false);
     }
   };
@@ -76,6 +86,9 @@ function Contact(props) {
           })
           .then((token) => {
             return res(token);
+          })
+          .catch((error) => {
+            throw error;
           });
       });
     });

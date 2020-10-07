@@ -9,8 +9,10 @@ import { setLoader } from "../store/actions/loader";
 import useWindowSize from "./Hooks/useWindowSize";
 import PortfolioItem from "./PortfolioItem";
 
-function Portfolio(props) {
+function Portfolio() {
   const [tab, setTab] = useState(0);
+
+  // Get window dimensions and add event listener
   const size = useWindowSize();
 
   const handleTabs = (e, tab) => {

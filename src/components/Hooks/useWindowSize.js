@@ -13,8 +13,14 @@ export default function useWindowSize() {
         height: window.innerHeight,
       });
     }
+
+    // create event listener to update state if window size changes
     window.addEventListener("resize", handleResize);
+
+    // Update state when component mounts
     handleResize();
+
+    // cleanup by removing event listener
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
