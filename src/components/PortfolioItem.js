@@ -21,83 +21,85 @@ export default function PortfolioItem(props) {
   const [imgLoaded, setImgLoaded] = useState(false);
 
   return (
-    <div
+    <Box
+      p={3}
       role="tabpanel"
-      hidden={tab !== index}
       id={`tabpanel-${index}`}
-      style={{ width: "100%" }}
       aria-labelledby={`tab-${index}`}
+      className={clsx({
+        [classes.root]: true,
+        [classes.activeTab]: tab === index,
+      })}
     >
-      <Box p={3} className={classes.root}>
-        <Grid container spacing={3}>
-          <Grid item sm={12} md={6}>
-            <Link href={item.url} target="_blank">
-              <div className={classes.imgContainer}>
-                <img
-                  alt={item.title}
-                  src={item.screenshot}
-                  onLoad={() => setImgLoaded(true)}
-                  className={clsx({
-                    [classes.screenshot]: true,
-                    [classes.imgLoaded]: imgLoaded,
-                  })}
-                />
-                {!imgLoaded && <CircularProgress className={classes.loader} />}
-              </div>
-            </Link>
-          </Grid>
-          <Grid item sm={12} md={6}>
-            <Typography
-              className={classes.title}
-              align="center"
-              component="h3"
-              variant="h3"
-              gutterBottom
-            >
-              {item.title}
-              <IconButton
-                href={item.url}
-                target="_blank"
-                component={Link}
-                disabled={!item.url ? true : false}
-              >
-                <OpenInNewSharpIcon />
-              </IconButton>
-              <br />
-              <Button
-                rel="noopener"
-                target="_blank"
-                component={Link}
-                color="secondary"
-                href={item.github}
-                variant="outlined"
-                underline="none"
-                startIcon={<GitHubIcon />}
-                disabled={!item.github ? true : false}
-              >
-                {item.github
-                  ? "Check out the repo"
-                  : "Sorry this is a private repo"}
-              </Button>
-            </Typography>
-            <div>{item.description()}</div>
-            <div className={classes.stackWrapper}>
-              {item.stack.map((x, i) => (
-                <Tooltip key={i} title={x.name}>
-                  <img src={x.logo} alt={x.name} className={classes.svg} />
-                </Tooltip>
-              ))}
+      <Grid container spacing={3}>
+        <Grid item sm={12} md={6}>
+          <Link href={item.url} target="_blank">
+            <div className={classes.imgContainer}>
+              <img
+                alt={item.title}
+                src={item.screenshot}
+                onLoad={() => setImgLoaded(true)}
+                className={clsx({
+                  [classes.screenshot]: true,
+                  [classes.imgLoaded]: imgLoaded,
+                })}
+              />
+              {!imgLoaded && <CircularProgress className={classes.loader} />}
             </div>
-          </Grid>
+          </Link>
         </Grid>
-      </Box>
-    </div>
+        <Grid item sm={12} md={6}>
+          <Typography
+            className={classes.title}
+            align="center"
+            component="h3"
+            variant="h3"
+            gutterBottom
+          >
+            {item.title}
+            <IconButton
+              href={item.url}
+              target="_blank"
+              component={Link}
+              disabled={!item.url ? true : false}
+            >
+              <OpenInNewSharpIcon />
+            </IconButton>
+            <br />
+            <Button
+              rel="noopener"
+              target="_blank"
+              component={Link}
+              color="secondary"
+              href={item.github}
+              variant="outlined"
+              underline="none"
+              startIcon={<GitHubIcon />}
+              disabled={!item.github ? true : false}
+            >
+              {item.github
+                ? "Check out the repo"
+                : "Sorry this is a private repo"}
+            </Button>
+          </Typography>
+          <div>{item.description()}</div>
+          <div className={classes.stackWrapper}>
+            {item.stack.map((x, i) => (
+              <Tooltip key={i} title={x.name}>
+                <img src={x.logo} alt={x.name} className={classes.svg} />
+              </Tooltip>
+            ))}
+          </div>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
+    display: "none",
+    width: "100%",
     maxWidth: "100%",
     overflowY: "scroll",
     height: "calc(100vh - 25px - 72px - 48px)",
@@ -106,6 +108,9 @@ const useStyles = makeStyles((theme) => ({
       overflowY: "hidden",
       backgroundColor: "transparent",
     },
+  },
+  activeTab: {
+    display: "flex",
   },
   imgContainer: {
     height: "auto",
