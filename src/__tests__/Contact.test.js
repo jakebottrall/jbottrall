@@ -48,6 +48,7 @@ test("<Contact /> form control and submission", async () => {
     />
   );
 
+  // test each input is and changing updates the value
   testForm.forEach((x) => {
     const input = getByTestId(x.id);
     expect(input.value).toBe(x.initialValue);
@@ -59,17 +60,21 @@ test("<Contact /> form control and submission", async () => {
     expect(input.value).toBe(x.setValue);
   });
 
+  // trigger form submission
   const button = getByTestId("contact-form-button");
 
   fireEvent.click(button);
 
+  // wait for form to be reset signalling handle submit function has complete
   await waitFor(() => expect(getByTestId("name").value).toBe(""));
 
+  // Check all expected functions to be called during submit handling
   expect(setLoader).toHaveBeenCalledTimes(2);
   expect(apiCall).toHaveBeenCalledTimes(1);
   expect(validateCaptcha).toHaveBeenCalledTimes(1);
   expect(addSnackbar).toHaveBeenCalledTimes(1);
 
+  // check that no errors or warnings are present
   expect(console.error).not.toHaveBeenCalled();
   expect(console.warn).not.toHaveBeenCalled();
 });
