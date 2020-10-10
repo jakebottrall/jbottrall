@@ -21,7 +21,8 @@ jest.mock("../services/api", () => ({
   ),
 }));
 
-const testForm = [
+// test form data
+const form = [
   {
     id: "name",
     initialValue: "",
@@ -48,8 +49,8 @@ test("<Contact /> form control and submission", async () => {
     />
   );
 
-  // test each input is and changing updates the value
-  testForm.forEach((x) => {
+  // test each input starts with expected initial input and updates correctly on change
+  form.forEach((x) => {
     const input = getByTestId(x.id);
     expect(input.value).toBe(x.initialValue);
 
