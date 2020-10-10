@@ -5,6 +5,9 @@
     },
     {
       "path": "../ghost-contact"
+    },
+    {
+      "path": "../level-up-tuts/react-testing-tutorial"
     }
   ]
 }

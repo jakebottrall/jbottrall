@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { apiCall } from "../services/api";
+import { apiCall, validateCaptcha } from "../services/api";
 import { setLoader } from "../store/actions/loader";
 import { addSnackbar } from "../store/actions/snackbars";
 
@@ -37,7 +37,9 @@ const defaultForm = {
   reCaptcha: { secretKey: "JAKE_BOTTRALL_SECRET_KEY" },
 };
 
-function Contact(props) {
+export function Contact(props) {
+  const { addSnackbar, setLoader, history } = props;
+
   const [form, setForm] = useState(defaultForm);
 
   const handleChange = (e) => {
@@ -49,9 +51,9 @@ function Contact(props) {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const { addSnackbar, setLoader, history } = props;
     try {
+      e.preventDefault();
+
       // engage redux loader
       setLoader(true);
 
@@ -69,6 +71,8 @@ function Contact(props) {
       setForm(defaultForm);
       history.push("/");
     } catch (error) {
+      console.log(error);
+      console.log("erro1");
       // if unsuccessful display error message
       addSnackbar({ message: "Oops! Something went wrong" }, "error");
     } finally {
@@ -76,24 +80,6 @@ function Contact(props) {
       setLoader(false);
     }
   };
-
-  const validateCaptcha = () => {
-    return new Promise((res, rej) => {
-      window.grecaptcha.ready(() => {
-        window.grecaptcha
-          .execute("6LeErdIZAAAAAOAGjGEE_z4K5a1R9pt2_Ie6HxLU", {
-            action: "submit",
-          })
-          .then((token) => {
-            return res(token);
-          })
-          .catch((error) => {
-            throw error;
-          });
-      });
-    });
-  };
-
   const classes = useStyles();
   return (
     <Container className={classes.root} maxWidth="sm">
@@ -111,6 +97,7 @@ function Contact(props) {
           variant="outlined"
           autoComplete="name"
           onChange={handleChange}
+          inputProps={{ "data-testid": "name" }}
         />
 
         <TextField
@@ -124,6 +111,7 @@ function Contact(props) {
           value={form.email}
           autoComplete="email"
           onChange={handleChange}
+          inputProps={{ "data-testid": "email" }}
         />
 
         <TextField
@@ -137,6 +125,7 @@ function Contact(props) {
           variant="outlined"
           value={form.message}
           onChange={handleChange}
+          inputProps={{ "data-testid": "message" }}
         />
 
         <Button
@@ -144,6 +133,7 @@ function Contact(props) {
           color="primary"
           variant="outlined"
           className={classes.button}
+          data-testid="contact-form-button"
         >
           Submit
         </Button>

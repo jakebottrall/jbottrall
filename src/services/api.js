@@ -11,3 +11,20 @@ export function apiCall(method, path, data) {
       });
   });
 }
+
+export const validateCaptcha = () => {
+  return new Promise((res, rej) => {
+    window.grecaptcha.ready(() => {
+      window.grecaptcha
+        .execute("6LeErdIZAAAAAOAGjGEE_z4K5a1R9pt2_Ie6HxLU", {
+          action: "submit",
+        })
+        .then((token) => {
+          return res(token);
+        })
+        .catch((error) => {
+          throw error;
+        });
+    });
+  });
+};
