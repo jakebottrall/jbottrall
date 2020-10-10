@@ -15,6 +15,7 @@ export default function NavItem(props) {
           color="primary"
           href={item.href}
           component={item.component}
+          data-testid="nav-link"
           rel={item.type === "external" ? "noopener" : ""}
           target={item.type === "external" ? "_blank" : ""}
         >

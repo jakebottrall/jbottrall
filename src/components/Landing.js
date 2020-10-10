@@ -11,7 +11,7 @@ import WebSharpIcon from "@material-ui/icons/WebSharp";
 
 import NavItem from "./NavItem";
 
-const navItems = [
+export const navItems = [
   {
     delay: "200ms",
     component: Link,
@@ -75,6 +75,7 @@ export default function Landing() {
           align="center"
           component="h1"
           className={classes.title}
+          data-testid="landing-page-title"
         >
           Jake Bottrall
         </Typography>
@@ -83,8 +84,10 @@ export default function Landing() {
           align="center"
           variant="subtitle1"
           className={classes.subtitle}
+          data-testid="landing-page-subtitle"
         >
           Web Dev {bullet} Tech Enthusiast {bullet} Decent Bloke
+          data-testid="landing-page-title"
         </Typography>
         <nav className={classes.nav}>
           {navItems.map((item, i) => (
