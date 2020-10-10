@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -16,22 +16,26 @@ export default function Home() {
   const [slideBoat, setSlideBoat] = useState(false);
 
   // if both background assets have loaded initiate animations
-  if (backgroundStatus) {
-    // Slide the background up once
-    setTimeout(() => {
-      setSlideBackground(true);
-    }, 1);
 
-    // slide the boat left once
-    setTimeout(() => {
-      setSlideBoat(true);
-    }, 1000);
+  useEffect(() => {
+    if (backgroundStatus) {
+      // Slide the background up once
+      setTimeout(() => {
+        setSlideBackground(true);
+      }, 1);
 
-    // roll the background infinitely
-    setTimeout(() => {
-      setRollBackground(true);
-    }, 1000);
-  }
+      // slide the boat left once
+      setTimeout(() => {
+        setSlideBoat(true);
+      }, 1000);
+
+      // roll the background infinitely
+      setTimeout(() => {
+        setRollBackground(true);
+      }, 1000);
+    }
+  }, [backgroundStatus]);
+
   return (
     <Fragment>
       <div
