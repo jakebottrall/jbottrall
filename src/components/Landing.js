@@ -87,7 +87,6 @@ export default function Landing() {
           data-testid="landing-page-subtitle"
         >
           Web Dev {bullet} Tech Enthusiast {bullet} Decent Bloke
-          data-testid="landing-page-title"
         </Typography>
         <nav className={classes.nav}>
           {navItems.map((item, i) => (

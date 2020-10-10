@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 
 import { Tab, Tabs, Typography } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { data } from "../data/portfolio";
-import { setLoader } from "../store/actions/loader";
 import useWindowSize from "./Hooks/useWindowSize";
 import PortfolioItem from "./PortfolioItem";
 
-function Portfolio() {
+export default function Portfolio() {
+  const classes = useStyles();
   const [tab, setTab] = useState(0);
 
   // Get window dimensions and add event listener
@@ -19,8 +18,6 @@ function Portfolio() {
     e.preventDefault();
     setTab(tab);
   };
-
-  const classes = useStyles();
 
   return (
     <React.Fragment>
@@ -77,7 +74,3 @@ const useStyles = makeStyles((theme) => ({
     borderRight: `1px solid ${theme.palette.divider}`,
   },
 }));
-
-export default connect(null, {
-  setLoader,
-})(Portfolio);

@@ -1,14 +1,17 @@
 import React from "react";
-import { connect } from "react-redux";
 
 import { Backdrop, CircularProgress } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
 
-function Loader(props) {
+export default function Loader(props) {
   const classes = useStyles();
-  const { loader } = props;
+  const { open } = props;
   return (
-    <Backdrop className={classes.backdrop} open={loader}>
+    <Backdrop
+      open={open}
+      className={classes.backdrop}
+      data-testid="loader-backdrop"
+    >
       <CircularProgress color="inherit" />
     </Backdrop>
   );
@@ -20,11 +23,3 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
   },
 }));
-
-function mapStateToProps(state) {
-  return {
-    loader: state.loader,
-  };
-}
-
-export default connect(mapStateToProps)(Loader);

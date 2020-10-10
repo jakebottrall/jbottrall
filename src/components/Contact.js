@@ -1,5 +1,5 @@
+import { useSnackbar } from "notistack";
 import React, { useState } from "react";
-import { connect } from "react-redux";
 
 import {
   Button,
@@ -11,8 +11,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 
 import { apiCall, validateCaptcha } from "../services/api";
-import { setLoader } from "../store/actions/loader";
-import { addSnackbar } from "../store/actions/snackbars";
+import Loader from "./Feedback/Loader";
 
 // configure contact form urls based on environment
 const baseUrl =
@@ -37,10 +36,12 @@ const defaultForm = {
   reCaptcha: { secretKey: "JAKE_BOTTRALL_SECRET_KEY" },
 };
 
-export function Contact(props) {
-  const { addSnackbar, setLoader, history } = props;
+export default function Contact(props) {
+  const { history } = props;
+  const { enqueueSnackbar } = useSnackbar();
 
   const [form, setForm] = useState(defaultForm);
+  const [loader, setLoader] = useState(false);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -54,7 +55,7 @@ export function Contact(props) {
     try {
       e.preventDefault();
 
-      // engage redux loader
+      // enable loader
       setLoader(true);
 
       // grab form data
@@ -67,16 +68,20 @@ export function Contact(props) {
       await apiCall("post", contactUrl, data);
 
       // if successful notify user, reset form and go back to landing page
-      addSnackbar({ message: "Message succefully sent" }, "success");
+      enqueueSnackbar("Message sent successfully!", {
+        variant: "success",
+      });
+
       setForm(defaultForm);
       history.push("/");
     } catch (error) {
       console.log(error);
-      console.log("erro1");
       // if unsuccessful display error message
-      addSnackbar({ message: "Oops! Something went wrong" }, "error");
+      enqueueSnackbar("Oops! Something went wrong.", {
+        variant: "error",
+      });
     } finally {
-      // disengage redux loader no matter what outcome
+      // diable loader no matter what outcome
       setLoader(false);
     }
   };
@@ -151,6 +156,7 @@ export function Contact(props) {
         </Link>
         apply.
       </Typography>
+      <Loader open={loader} />
     </Container>
   );
 }
@@ -166,8 +172,3 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
 }));
-
-export default connect(null, {
-  setLoader,
-  addSnackbar,
-})(Contact);
