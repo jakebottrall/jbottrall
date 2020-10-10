@@ -1,5 +1,5 @@
 import { SnackbarProvider } from "notistack";
-import React, { Fragment } from "react";
+import React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 
@@ -17,25 +17,22 @@ console.log(`jakebottrall.com v ${packageJSON.version}`);
 
 export default function App() {
   return (
-    <Fragment>
-      <Provider store={store}>
-        <Router>
-          <ThemeProvider theme={theme}>
-            <SnackbarProvider
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "right",
-              }}
-            >
-              <CssBaseline />
-
-              <Loader />
-              <Notifier />
-              <Main />
-            </SnackbarProvider>
-          </ThemeProvider>
-        </Router>
-      </Provider>
-    </Fragment>
+    <Provider store={store}>
+      <Router>
+        <ThemeProvider theme={theme}>
+          <SnackbarProvider
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right",
+            }}
+          >
+            <CssBaseline />
+            <Loader />
+            <Notifier />
+            <Main />
+          </SnackbarProvider>
+        </ThemeProvider>
+      </Router>
+    </Provider>
   );
 }
