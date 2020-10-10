@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import BackgroundImage from "../../img/background.png";
-import BoatImage from "../../img/boat.png";
+import BackgroundImage from "../../assets/background.png";
+import BoatImage from "../../assets/boat.png";
 
 export default function useBackgroundStatus() {
   const [status, setStatus] = useState(false);

@@ -3,8 +3,8 @@ import React, { Fragment, useState } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-import BG from "../img/background.png";
-import Boat from "../img/boat.png";
+import BG from "../assets/background.png";
+import Boat from "../assets/boat.png";
 import useBackgroundStatus from "./Hooks/useBackgroundStatus";
 
 export default function Home() {

@@ -2,22 +2,22 @@ import React from "react";
 
 import { Link } from "@material-ui/core";
 
-import argusvision from "../img/argusvision.png";
-import armax from "../img/armax.png";
-import awes from "../img/awes.png";
-import bidbox from "../img/bidbox.png";
-import daciatech from "../img/daciatech.png";
-import eim from "../img/eim.png";
-import ghost from "../img/ghost.svg";
-import jbottrall from "../img/jbottrall.png";
-import less from "../img/less.svg";
-import material from "../img/material.svg";
-import mongo from "../img/mongo.svg";
-import nginx from "../img/nginx.svg";
-import nodeJs from "../img/node-js.svg";
-import react from "../img/react.svg";
-import summitseekers from "../img/summitseekers.png";
-import ubuntu from "../img/ubuntu.svg";
+import ghost from "../assets/logos/ghost.svg";
+import less from "../assets/logos/less.svg";
+import material from "../assets/logos/material.svg";
+import mongo from "../assets/logos/mongo.svg";
+import nginx from "../assets/logos/nginx.svg";
+import nodeJs from "../assets/logos/node-js.svg";
+import react from "../assets/logos/react.svg";
+import ubuntu from "../assets/logos/ubuntu.svg";
+import argusvision from "../assets/screenshots/argusvision.png";
+import armax from "../assets/screenshots/armax.png";
+import awes from "../assets/screenshots/awes.png";
+import bidbox from "../assets/screenshots/bidbox.png";
+import daciatech from "../assets/screenshots/daciatech.png";
+import eim from "../assets/screenshots/eim.png";
+import jbottrall from "../assets/screenshots/jbottrall.png";
+import summitseekers from "../assets/screenshots/summitseekers.png";
 
 export const data = [
   {

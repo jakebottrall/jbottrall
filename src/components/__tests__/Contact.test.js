@@ -2,8 +2,8 @@ import React from "react";
 
 import { cleanup, fireEvent, render, waitFor } from "@testing-library/react";
 
-import { Contact } from "../components/Contact.js";
-import { apiCall, validateCaptcha } from "../services/api";
+import { apiCall, validateCaptcha } from "../../services/api";
+import { Contact } from "../Contact.js";
 
 afterEach(cleanup);
 
@@ -14,7 +14,7 @@ const setLoader = jest.fn(() => true);
 const addSnackbar = jest.fn(() => true);
 const history = [];
 
-jest.mock("../services/api", () => ({
+jest.mock("../../services/api", () => ({
   apiCall: jest.fn(() => {}),
   validateCaptcha: jest.fn(
     () => "asdfasdfasdfh8a7sdyf07h42098fg642b9ybq08g034pb"
