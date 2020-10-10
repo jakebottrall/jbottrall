@@ -51,11 +51,11 @@ export default function PortfolioItem(props) {
         </Grid>
         <Grid item sm={12} md={6} className={classes.content}>
           <Typography
+            noWrap
             variant="h3"
             gutterBottom
             align="center"
             component="h3"
-            className={classes.title}
           >
             {item.title}
             <IconButton
@@ -143,11 +143,6 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
     alignItems: "center",
     justifyContent: "space-around",
-  },
-  title: {
-    maxWidth: "100%",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
   },
   svg: {
     padding: 5,
