@@ -2,6 +2,7 @@ import React from "react";
 
 import { cleanup, render } from "@testing-library/react";
 
+import { data } from "../../data/portfolio";
 import Portfolio from "../Portfolio";
 
 afterEach(cleanup);
@@ -9,10 +10,10 @@ afterEach(cleanup);
 console.error = jest.fn(() => "error");
 console.warn = jest.fn(() => "warn");
 
-test("<Portfolio />", () => {
-  const {} = render(<Portfolio />);
-
-  //   check if any errors or warnings are present
-  expect(console.error).not.toHaveBeenCalled();
-  expect(console.warn).not.toHaveBeenCalled();
+describe("<Portfolio />", () => {
+  it("renders without warnings or errors", () => {
+    const {} = render(<Portfolio />);
+    expect(console.error).not.toBeCalled();
+    expect(console.warn).not.toBeCalled();
+  });
 });
