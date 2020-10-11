@@ -11,19 +11,15 @@ export default function Home() {
   const classes = useStyles();
 
   const backgroundStatus = useBackgroundStatus();
+
   const [slideBackground, setSlideBackground] = useState(false);
   const [rollBackground, setRollBackground] = useState(false);
   const [slideBoat, setSlideBoat] = useState(false);
 
-  // if both background assets have loaded initiate animations
-
+  // if backgroundStatus hook returns as loaded initiate animations
   useEffect(() => {
     if (backgroundStatus) {
-      // Slide the background up once
-      setTimeout(() => {
-        setSlideBackground(true);
-      }, 1);
-
+      setSlideBackground(true);
       // slide the boat left once
       setTimeout(() => {
         setSlideBoat(true);
@@ -40,6 +36,7 @@ export default function Home() {
     <Fragment>
       <div
         id="bg"
+        data-testid="background-image"
         className={clsx({
           [classes.bg]: true,
           [classes.slideBackground]: slideBackground,
@@ -50,6 +47,7 @@ export default function Home() {
         <img
           src={Boat}
           alt="boat"
+          data-testid="boat-image"
           className={clsx({
             [classes.boat]: true,
             [classes.slideBoat]: slideBoat,
@@ -75,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: "500px auto",
     transition: "top 1s ease-out",
     transform: "translate3d(0,0,0)",
-    background: `#DCE0F0 url(${BG}) bottom left`,
+    background: `${theme.palette.background.default} url(${BG}) bottom left`,
     [theme.breakpoints.up("lg")]: {
       backgroundSize: "1500px auto",
     },

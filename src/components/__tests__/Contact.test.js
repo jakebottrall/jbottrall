@@ -6,6 +6,11 @@ import { cleanup, fireEvent, render, waitFor } from "@testing-library/react";
 import { apiCall, validateCaptcha } from "../../services/api";
 import Contact from "../Contact.js";
 
+afterEach(cleanup);
+
+console.error = jest.fn(() => "error");
+console.warn = jest.fn(() => "warn");
+
 // set up mock for enqueue snackbar
 jest.mock("notistack", () => ({
   useSnackbar: jest.fn(),
@@ -20,13 +25,6 @@ jest.mock("../../services/api", () => ({
   apiCall: jest.fn(() => {}),
   validateCaptcha: jest.fn(() => "asdfasdfasdfh8a7sdy034pb"),
 }));
-
-afterEach(cleanup);
-
-console.error = jest.fn(() => "error");
-console.warn = jest.fn(() => "warn");
-
-const history = [];
 
 // test form data
 const form = [
@@ -48,7 +46,7 @@ const form = [
 ];
 
 test("<Contact /> form control and submission", async () => {
-  const { getByTestId, debug } = render(<Contact history={history} />);
+  const { getByTestId, debug } = render(<Contact history={[]} />);
 
   // test each input starts with expected initial input and updates correctly on change
   form.forEach((x) => {

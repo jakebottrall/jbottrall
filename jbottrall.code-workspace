@@ -1,16 +1,13 @@
 {
-  "folders": [
-    {
-      "path": "."
-    },
-    {
-      "path": "../ghost-contact"
-    },
-    {
-      "path": "../level-up-tuts/react-testing-tutorial"
-    },
-    {
-      "path": "../level-up-tuts/level-up-javascript-testing-101"
-    }
-  ]
+    "folders": [
+        {
+            "path": "."
+        },
+        {
+            "path": "../ghost-contact"
+        },
+        {
+            "path": "../level-up-tuts/react-testing-tutorial"
+        }
+    ]
 }
