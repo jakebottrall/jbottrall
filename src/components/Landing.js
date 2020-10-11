@@ -90,7 +90,7 @@ export default function Landing() {
         </Typography>
         <nav className={classes.nav}>
           {navItems.map((item, i) => (
-            <NavItem key={i} item={item} />
+            <NavItem key={i} {...item} />
           ))}
         </nav>
       </Container>
@@ -109,8 +109,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   nav: {
-    display: "flex",
     width: "100%",
+    display: "flex",
     justifyContent: "space-between",
   },
   title: {
@@ -121,14 +121,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.35em",
   },
   bullet: {
-    display: "inline-block",
     margin: "0 2px",
+    display: "inline-block",
     transform: "scale(0.8)",
-  },
-  tooltip: {
-    backgroundColor: theme.palette.common.white,
-    color: "rgba(0, 0, 0, 0.87)",
-    boxShadow: theme.shadows[1],
-    fontSize: 11,
   },
 }));

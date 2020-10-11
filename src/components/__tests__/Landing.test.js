@@ -11,16 +11,6 @@ console.warn = jest.fn(() => "warn");
 afterEach(cleanup);
 
 describe("<Landing />", () => {
-  it("renders without warnings or errors", () => {
-    const {} = render(
-      <MemoryRouter>
-        <Landing />
-      </MemoryRouter>
-    );
-    expect(console.error).not.toBeCalled();
-    expect(console.warn).not.toBeCalled();
-  });
-
   it("renders expected components", () => {
     const { getByTestId, getAllByTestId } = render(
       <MemoryRouter>
@@ -39,5 +29,15 @@ describe("<Landing />", () => {
     //   check nav items have rendered
     const navLinks = getAllByTestId("nav-link");
     expect(navLinks.length).toBe(navItems.length);
+  });
+
+  it("renders without warnings or errors", () => {
+    const {} = render(
+      <MemoryRouter>
+        <Landing />
+      </MemoryRouter>
+    );
+    expect(console.error).not.toBeCalled();
+    expect(console.warn).not.toBeCalled();
   });
 });

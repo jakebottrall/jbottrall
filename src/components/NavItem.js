@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 
 import { IconButton, Zoom } from "@material-ui/core";
@@ -5,23 +6,33 @@ import { IconButton, Zoom } from "@material-ui/core";
 import { LightTooltip } from "./Feedback/Tooltips";
 
 export default function NavItem(props) {
-  const { item } = props;
+  const { to, href, component, type, delay, title, Icon } = props;
 
   return (
-    <Zoom in style={{ transitionDelay: item.delay }}>
-      <LightTooltip TransitionComponent={Zoom} title={item.title}>
+    <Zoom in style={{ transitionDelay: delay }}>
+      <LightTooltip TransitionComponent={Zoom} title={title}>
         <IconButton
-          to={item.to}
+          to={to}
+          href={href}
           color="primary"
-          href={item.href}
-          component={item.component}
+          component={component}
           data-testid="nav-link"
-          rel={item.type === "external" ? "noopener" : ""}
-          target={item.type === "external" ? "_blank" : ""}
+          rel={type === "external" ? "noopener" : ""}
+          target={type === "external" ? "_blank" : ""}
         >
-          {item.Icon()}
+          {Icon()}
         </IconButton>
       </LightTooltip>
     </Zoom>
   );
 }
+
+NavItem.propTypes = {
+  to: PropTypes.string,
+  href: PropTypes.string,
+  title: PropTypes.string,
+  Icon: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
+  delay: PropTypes.string.isRequired,
+  component: PropTypes.object.isRequired,
+};
