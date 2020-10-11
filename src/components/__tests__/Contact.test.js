@@ -44,45 +44,48 @@ const form = [
     setValue: "Hey there,\n how's it going?\n Regards,\n Jake Bottrall",
   },
 ];
-
-test("<Contact /> form control and submission", async () => {
-  const { getByTestId } = render(<Contact history={[]} />);
-
-  // test each input starts with expected initial input and updates correctly on change
-  form.forEach((x) => {
-    const input = getByTestId(x.id);
-    expect(input.value).toBe(x.initialValue);
-
-    fireEvent.change(input, {
-      target: { value: x.setValue },
-    });
-
-    expect(input.value).toBe(x.setValue);
+describe("<Contact />", () => {
+  it("renders without warnings or errors", () => {
+    const {} = render(<Contact history={[]} />);
+    expect(console.error).not.toBeCalled();
+    expect(console.warn).not.toBeCalled();
   });
 
-  // check loader is not open
-  const loader = getByTestId("loader-backdrop");
-  expect(loader.style.opacity).toBe("0");
+  it("updates and submits form correctly", async () => {
+    const { getByTestId } = render(<Contact history={[]} />);
 
-  // trigger form submission
-  const button = getByTestId("contact-form-button");
-  fireEvent.click(button);
+    // test each input starts with expected initial input and updates correctly on change
+    form.forEach((x) => {
+      const input = getByTestId(x.id);
+      expect(input.value).toBe(x.initialValue);
 
-  // check loader has been opened
-  expect(loader.style.opacity).toBe("1");
+      fireEvent.change(input, {
+        target: { value: x.setValue },
+      });
 
-  // wait for form to be reset signalling handle submit function has complete
-  await waitFor(() => expect(getByTestId("name").value).toBe(""));
+      expect(input.value).toBe(x.setValue);
+    });
 
-  // Check all expected functions to be called during submit handling
-  expect(apiCall).toHaveBeenCalledTimes(1);
-  expect(validateCaptcha).toHaveBeenCalledTimes(1);
-  expect(enqueueSnackbar).toHaveBeenCalledTimes(1);
+    // check loader is not open
+    const loader = getByTestId("loader-backdrop");
+    expect(loader.style.opacity).toBe("0");
 
-  // check loader has been closed
-  expect(loader.style.opacity).toBe("0");
+    // trigger form submission
+    const button = getByTestId("contact-form-button");
+    fireEvent.click(button);
 
-  // check that no errors or warnings are present
-  expect(console.error).not.toHaveBeenCalled();
-  expect(console.warn).not.toHaveBeenCalled();
+    // check loader has been opened
+    expect(loader.style.opacity).toBe("1");
+
+    // wait for form to be reset signalling handle submit function has complete
+    await waitFor(() => expect(getByTestId("name").value).toBe(""));
+
+    // Check all expected functions to be called during submit handling
+    expect(apiCall).toHaveBeenCalledTimes(1);
+    expect(validateCaptcha).toHaveBeenCalledTimes(1);
+    expect(enqueueSnackbar).toHaveBeenCalledTimes(1);
+
+    // check loader has been closed
+    expect(loader.style.opacity).toBe("0");
+  });
 });
