@@ -9,7 +9,6 @@ import useBackgroundStatus from "./Hooks/useBackgroundStatus";
 
 export default function Home() {
   const classes = useStyles();
-
   const backgroundStatus = useBackgroundStatus();
 
   const [slideBackground, setSlideBackground] = useState(false);

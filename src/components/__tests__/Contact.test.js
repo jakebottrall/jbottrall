@@ -46,7 +46,7 @@ const form = [
 ];
 
 test("<Contact /> form control and submission", async () => {
-  const { getByTestId, debug } = render(<Contact history={[]} />);
+  const { getByTestId } = render(<Contact history={[]} />);
 
   // test each input starts with expected initial input and updates correctly on change
   form.forEach((x) => {
