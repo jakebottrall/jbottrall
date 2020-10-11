@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 
 import {
@@ -17,7 +18,16 @@ import OpenInNewSharpIcon from "@material-ui/icons/OpenInNewSharp";
 import { LightTooltip } from "./Feedback/Tooltips";
 
 export default function PortfolioItem(props) {
-  const { item, index, tab } = props;
+  const {
+    tab,
+    url,
+    index,
+    title,
+    stack,
+    github,
+    screenshot,
+    description,
+  } = props;
   const classes = useStyles();
   const [imgLoaded, setImgLoaded] = useState(false);
 
@@ -34,11 +44,11 @@ export default function PortfolioItem(props) {
     >
       <Grid container spacing={3}>
         <Grid item sm={12} md={6}>
-          <Link href={item.url} target="_blank">
+          <Link href={url} target="_blank">
             <div className={classes.imgContainer}>
               <img
-                alt={item.title}
-                src={item.screenshot}
+                alt={title}
+                src={screenshot}
                 onLoad={() => setImgLoaded(true)}
                 className={clsx({
                   [classes.screenshot]: true,
@@ -57,35 +67,33 @@ export default function PortfolioItem(props) {
             align="center"
             component="h3"
           >
-            {item.title}
+            {title}
             <IconButton
-              href={item.url}
+              href={url}
               target="_blank"
               component={Link}
-              disabled={!item.url ? true : false}
+              disabled={!url ? true : false}
             >
               <OpenInNewSharpIcon />
             </IconButton>
             <br />
             <Button
+              href={github}
               rel="noopener"
               target="_blank"
               component={Link}
               underline="none"
               color="secondary"
-              href={item.github}
               variant="outlined"
               startIcon={<GitHubIcon />}
-              disabled={!item.github ? true : false}
+              disabled={!github ? true : false}
             >
-              {item.github
-                ? "Check out the repo"
-                : "Sorry this is a private repo"}
+              {github ? "Check out the repo" : "Sorry this is a private repo"}
             </Button>
           </Typography>
-          <div>{item.description()}</div>
+          <div>{description()}</div>
           <div className={classes.stackWrapper}>
-            {item.stack.map((x, i) => (
+            {stack.map((x, i) => (
               <LightTooltip key={i} title={x.name}>
                 <img src={x.logo} alt={x.name} className={classes.svg} />
               </LightTooltip>
@@ -96,6 +104,17 @@ export default function PortfolioItem(props) {
     </Box>
   );
 }
+
+PortfolioItem.propTypes = {
+  url: PropTypes.string,
+  github: PropTypes.string,
+  screenshot: PropTypes.string,
+  tab: PropTypes.number.isRequired,
+  stack: PropTypes.array.isRequired,
+  index: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.func.isRequired,
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {

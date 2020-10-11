@@ -45,7 +45,7 @@ export default function Portfolio() {
           ))}
         </Tabs>
         {data.map((x, i) => (
-          <PortfolioItem key={i} item={x} index={i} tab={tab} />
+          <PortfolioItem key={i} index={i} tab={tab} {...x} />
         ))}
       </div>
     </React.Fragment>
