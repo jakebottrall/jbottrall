@@ -10,8 +10,14 @@ afterEach(cleanup);
 console.error = jest.fn(() => "error");
 console.warn = jest.fn(() => "warn");
 
-// mock custom background status hook
-jest.mock("../Hooks/useBackgroundStatus", () => jest.fn(() => true));
+// simulate image asssets loading being successful after 100ms
+global.Image = class {
+  constructor() {
+    setTimeout(() => {
+      this.onload();
+    }, 100);
+  }
+};
 
 test("<Background />", async () => {
   const { getByTestId } = render(<Background />);
