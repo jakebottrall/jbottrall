@@ -36,6 +36,7 @@ export default function PortfolioItem(props) {
       p={3}
       role="tabpanel"
       id={`tabpanel-${index}`}
+      data-testid="portfolio-item"
       aria-labelledby={`tab-${index}`}
       className={clsx({
         [classes.root]: true,

@@ -29,6 +29,7 @@ export default function Portfolio() {
       <div className={classes.tabsWrapper}>
         <Tabs
           value={tab}
+          data-testid="tabs"
           variant="scrollable"
           onChange={handleTabs}
           className={classes.tabs}
