@@ -18,7 +18,9 @@ export default function Home() {
   // if backgroundStatus hook returns as loaded initiate animations
   useEffect(() => {
     if (backgroundStatus) {
+      // slide background image up
       setSlideBackground(true);
+
       // slide the boat left once
       setTimeout(() => {
         setSlideBoat(true);
