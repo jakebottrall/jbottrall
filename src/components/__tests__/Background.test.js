@@ -33,12 +33,6 @@ jest.mock("@material-ui/core/styles", () => ({
 }));
 
 describe("<Background />", () => {
-  it("renders without warnings or errors", () => {
-    const {} = render(<Background />);
-    expect(console.error).not.toBeCalled();
-    expect(console.warn).not.toBeCalled();
-  });
-
   it("correctly animates the image assets", async () => {
     const { getByTestId, debug } = render(<Background />);
 
@@ -67,5 +61,11 @@ describe("<Background />", () => {
     await waitFor(() =>
       expect(backgroundImage.classList.contains("rollBackground")).toBeTruthy()
     );
+  });
+
+  it("renders without warnings or errors", () => {
+    const {} = render(<Background />);
+    expect(console.error).not.toBeCalled();
+    expect(console.warn).not.toBeCalled();
   });
 });

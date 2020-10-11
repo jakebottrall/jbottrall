@@ -45,12 +45,6 @@ const form = [
   },
 ];
 describe("<Contact />", () => {
-  it("renders without warnings or errors", () => {
-    const {} = render(<Contact history={[]} />);
-    expect(console.error).not.toBeCalled();
-    expect(console.warn).not.toBeCalled();
-  });
-
   it("updates and submits form correctly", async () => {
     const { getByTestId } = render(<Contact history={[]} />);
 
@@ -87,5 +81,11 @@ describe("<Contact />", () => {
 
     // check loader has been closed
     expect(loader.style.opacity).toBe("0");
+  });
+
+  it("renders without warnings or errors", () => {
+    const {} = render(<Contact history={[]} />);
+    expect(console.error).not.toBeCalled();
+    expect(console.warn).not.toBeCalled();
   });
 });
