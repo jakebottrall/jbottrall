@@ -19,37 +19,53 @@ global.Image = class {
   }
 };
 
-test("<Background />", async () => {
-  const { getByTestId } = render(<Background />);
+// set up makestyles
+jest.mock("@material-ui/core/styles", () => ({
+  makeStyles: () =>
+    jest.fn(() => {
+      return {
+        bg: "bg",
+        slideBoat: "slideBoat",
+        rollBackground: "rollBackground",
+        slideBackground: "slideBackground",
+      };
+    }),
+}));
 
-  //   ensure background image is present with initial className
-  const backgroundImage = getByTestId("background-image");
-  expect(backgroundImage.classList.contains("makeStyles-bg-1")).toBeTruthy();
+describe("<Background />", () => {
+  it("renders without warnings or errors", () => {
+    const {} = render(<Background />);
+    expect(console.error).not.toBeCalled();
+    expect(console.warn).not.toBeCalled();
+  });
 
-  //   ensure boat image is present with correct src
-  const boatImage = getByTestId("boat-image");
-  expect(boatImage.getAttribute("src")).toBe(Boat);
+  it("correctly animates the image assets", async () => {
+    const { getByTestId, debug } = render(<Background />);
 
-  //   wait for first background animation
-  await waitFor(() =>
-    expect(
-      backgroundImage.classList.contains("makeStyles-slideBackground-2")
-    ).toBeTruthy()
-  );
+    //   ensure background image is present with initial className and without animation classes
+    const backgroundImage = getByTestId("background-image");
+    expect(backgroundImage.classList.contains("bg")).toBeTruthy();
+    expect(backgroundImage.classList.contains("slideBackground")).toBeFalsy();
+    expect(backgroundImage.classList.contains("rollBackground")).toBeFalsy();
 
-  //   wait for first boat animation
-  await waitFor(() =>
-    expect(boatImage.classList.contains("makeStyles-slideBoat-7")).toBeTruthy()
-  );
+    //   ensure boat image is present with correct src and without animation class
+    const boatImage = getByTestId("boat-image");
+    expect(boatImage.getAttribute("src")).toBe(Boat);
+    expect(boatImage.classList.contains("slideBoat")).toBeFalsy();
 
-  //   wait for second background animation
-  await waitFor(() =>
-    expect(
-      backgroundImage.classList.contains("makeStyles-rollBackground-3")
-    ).toBeTruthy()
-  );
+    //   wait for first background animation
+    await waitFor(() =>
+      expect(backgroundImage.classList.contains("slideBackground")).toBeTruthy()
+    );
 
-  // check that no errors or warnings are present
-  expect(console.error).not.toBeCalled();
-  expect(console.warn).not.toBeCalled();
+    //   wait for first boat animation
+    await waitFor(() =>
+      expect(boatImage.classList.contains("slideBoat")).toBeTruthy()
+    );
+
+    //   wait for second background animation
+    await waitFor(() =>
+      expect(backgroundImage.classList.contains("rollBackground")).toBeTruthy()
+    );
+  });
 });
