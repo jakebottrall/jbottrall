@@ -34,15 +34,15 @@ jest.mock("@material-ui/core/styles", () => ({
 
 describe("<Background />", () => {
   it("correctly animates the image assets", async () => {
-    const { getByTestId, debug } = render(<Background />);
+    const { getByTestId } = render(<Background />);
 
-    //   ensure background image is present with initial className and without animation classes
+    //   expect background image is present with initial className and without animation classes
     const backgroundImage = getByTestId("background-image");
     expect(backgroundImage.classList.contains("bg")).toBeTruthy();
     expect(backgroundImage.classList.contains("slideBackground")).toBeFalsy();
     expect(backgroundImage.classList.contains("rollBackground")).toBeFalsy();
 
-    //   ensure boat image is present with correct src and without animation class
+    //   expect boat image is present with correct src and without animation class
     const boatImage = getByTestId("boat-image");
     expect(boatImage.getAttribute("src")).toBe(Boat);
     expect(boatImage.classList.contains("slideBoat")).toBeFalsy();

@@ -18,15 +18,15 @@ describe("<Landing />", () => {
       </MemoryRouter>
     );
 
-    //   check title
+    //   expect a title
     const title = getByTestId("landing-page-title");
     expect(title.textContent).toBeTruthy();
 
-    //   check subtitle
+    //   expect a subtitle
     const subtitle = getByTestId("landing-page-subtitle");
     expect(subtitle.textContent).toBeTruthy();
 
-    //   check nav items have rendered
+    //   expect nav items to be present
     const navLinks = getAllByTestId("nav-link");
     expect(navLinks.length).toBe(navItems.length);
   });

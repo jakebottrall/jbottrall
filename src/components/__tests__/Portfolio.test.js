@@ -1,6 +1,6 @@
 import React from "react";
 
-import { cleanup, getByTestId, render } from "@testing-library/react";
+import { cleanup, render } from "@testing-library/react";
 
 import { data } from "../../data/portfolio";
 import Portfolio from "../Portfolio";
@@ -24,13 +24,15 @@ describe("<Portfolio />", () => {
     // expect orientation is not verticle on small screen
     expect(tabs.classList.contains("MuiTabs-vertical")).toBeFalsy();
 
-    // expect that all portfolio items render
+    // expect that all portfolio items to be present
     const portfolioItems = getAllByTestId("portfolio-item");
     expect(portfolioItems.length).toBe(data.length);
   });
 
   it("renders tabs vertically on large screens", () => {
+    // set display to large width
     window.innerWidth = 1000;
+
     const { getByTestId } = render(<Portfolio />);
 
     const tabs = getByTestId("tabs");

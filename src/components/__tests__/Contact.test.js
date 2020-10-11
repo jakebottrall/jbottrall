@@ -48,7 +48,7 @@ describe("<Contact />", () => {
   it("updates and submits form correctly", async () => {
     const { getByTestId } = render(<Contact history={[]} />);
 
-    // test each input starts with expected initial input and updates correctly on change
+    // expect each input starts with initial input and updates to expected value on change
     form.forEach((x) => {
       const input = getByTestId(x.id);
       expect(input.value).toBe(x.initialValue);
@@ -60,7 +60,7 @@ describe("<Contact />", () => {
       expect(input.value).toBe(x.setValue);
     });
 
-    // check loader is not open
+    // expect loader is not open
     const loader = getByTestId("loader-backdrop");
     expect(loader.style.opacity).toBe("0");
 
@@ -68,18 +68,18 @@ describe("<Contact />", () => {
     const button = getByTestId("contact-form-button");
     fireEvent.click(button);
 
-    // check loader has been opened
+    // expect loader has been opened
     expect(loader.style.opacity).toBe("1");
 
     // wait for form to be reset signalling handle submit function has complete
     await waitFor(() => expect(getByTestId("name").value).toBe(""));
 
-    // Check all expected functions to be called during submit handling
+    // expect functions to be called during submit handling
     expect(apiCall).toHaveBeenCalledTimes(1);
     expect(validateCaptcha).toHaveBeenCalledTimes(1);
     expect(enqueueSnackbar).toHaveBeenCalledTimes(1);
 
-    // check loader has been closed
+    // expect loader has been closed
     expect(loader.style.opacity).toBe("0");
   });
 
