@@ -45,11 +45,12 @@ export default function PortfolioItem(props) {
     >
       <Grid container spacing={3}>
         <Grid item sm={12} md={6}>
-          <Link href={url} target="_blank">
+          <Link href={url} target="_blank" data-testid="portfolio-item-links">
             <div className={classes.imgContainer}>
               <img
                 alt={title}
                 src={screenshot}
+                data-testid="portfolio-item-image"
                 onLoad={() => setImgLoaded(true)}
                 className={clsx({
                   [classes.screenshot]: true,
@@ -73,6 +74,7 @@ export default function PortfolioItem(props) {
               href={url}
               target="_blank"
               component={Link}
+              data-testid="portfolio-item-links"
               disabled={!url ? true : false}
             >
               <OpenInNewSharpIcon />
@@ -88,6 +90,7 @@ export default function PortfolioItem(props) {
               variant="outlined"
               startIcon={<GitHubIcon />}
               disabled={!github ? true : false}
+              data-testid="portfolio-item-github"
             >
               {github ? "Check out the repo" : "Sorry this is a private repo"}
             </Button>
