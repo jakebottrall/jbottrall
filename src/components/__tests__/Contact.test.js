@@ -8,9 +8,6 @@ import Contact from "../Contact.js";
 
 afterEach(cleanup);
 
-console.error = jest.fn(() => "error");
-console.warn = jest.fn(() => "warn");
-
 // set up mock for enqueue snackbar
 jest.mock("notistack", () => ({
   useSnackbar: jest.fn(),
@@ -86,7 +83,7 @@ describe("<Contact />", () => {
 
   it("renders without warnings or errors", () => {
     const {} = render(<Contact history={[]} />);
-    expect(console.error).not.toBeCalled();
     expect(console.warn).not.toBeCalled();
+    expect(console.error).not.toBeCalled();
   });
 });

@@ -5,9 +5,6 @@ import { cleanup, render } from "@testing-library/react";
 
 import Landing, { navItems } from "../Landing.js";
 
-console.error = jest.fn(() => "error");
-console.warn = jest.fn(() => "warn");
-
 afterEach(cleanup);
 
 describe("<Landing />", () => {
@@ -37,7 +34,7 @@ describe("<Landing />", () => {
         <Landing />
       </MemoryRouter>
     );
-    expect(console.error).not.toBeCalled();
     expect(console.warn).not.toBeCalled();
+    expect(console.error).not.toBeCalled();
   });
 });

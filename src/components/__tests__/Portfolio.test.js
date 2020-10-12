@@ -7,9 +7,6 @@ import Portfolio from "../Portfolio";
 
 afterEach(cleanup);
 
-console.error = jest.fn(() => "error");
-console.warn = jest.fn(() => "warn");
-
 describe("<Portfolio />", () => {
   it("renders expected components", () => {
     // set display to small width
@@ -43,7 +40,7 @@ describe("<Portfolio />", () => {
 
   it("renders without warnings or errors", () => {
     const {} = render(<Portfolio />);
-    expect(console.error).not.toBeCalled();
     expect(console.warn).not.toBeCalled();
+    expect(console.error).not.toBeCalled();
   });
 });

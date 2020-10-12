@@ -7,18 +7,6 @@ import Background from "../Background";
 
 afterEach(cleanup);
 
-console.error = jest.fn(() => "error");
-console.warn = jest.fn(() => "warn");
-
-// simulate image asssets loading being successful after 100ms
-global.Image = class {
-  constructor() {
-    setTimeout(() => {
-      this.onload();
-    }, 100);
-  }
-};
-
 // set up mock for makestyles
 jest.mock("@material-ui/core/styles", () => ({
   makeStyles: () =>
@@ -65,7 +53,7 @@ describe("<Background />", () => {
 
   it("renders without warnings or errors", () => {
     const {} = render(<Background />);
-    expect(console.error).not.toBeCalled();
     expect(console.warn).not.toBeCalled();
+    expect(console.error).not.toBeCalled();
   });
 });

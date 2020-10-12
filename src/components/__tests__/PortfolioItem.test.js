@@ -7,9 +7,6 @@ import PortfolioItem from "../PortfolioItem";
 
 afterEach(cleanup);
 
-console.error = jest.fn(() => "error");
-console.warn = jest.fn(() => "warn");
-
 const testData = {
   tab: 0,
   index: 0,
@@ -51,7 +48,7 @@ describe("<PortfolioItem />", () => {
 
   it("renders without warnings or errors", () => {
     const {} = render(<PortfolioItem {...testData} />);
-    expect(console.error).not.toBeCalled();
     expect(console.warn).not.toBeCalled();
+    expect(console.error).not.toBeCalled();
   });
 });

@@ -18,7 +18,8 @@ const routes = [
   { path: "/contact", Component: Contact },
 ];
 
-function Main(props) {
+// exported individually to allow for testing
+export function Main(props) {
   // check if background assets have loaded
   const backgroundStatus = useBackgroundStatus();
 
@@ -29,15 +30,17 @@ function Main(props) {
 
       <Loader open={!backgroundStatus} />
 
-      {/* Wait for background assets to load before displaying pages */}
       {backgroundStatus && (
-        <TransitionGroup className="transition-group">
+        <TransitionGroup
+          className="transition-group"
+          data-testid="transition-group"
+        >
           <CSSTransition
             classNames="slide"
             key={props.location.key}
             timeout={{ enter: 500, exit: 500 }}
           >
-            <div className={classes.wrapper}>
+            <div className={classes.wrapper} data-testid="component-wrapper">
               <BackButton {...props} />
               <Switch location={props.location}>
                 {routes.map(({ path, Component }) => (
