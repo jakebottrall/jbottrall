@@ -44,6 +44,7 @@ const form = [
     setValue: "Hey there,\n how's it going?\n Regards,\n Jake Bottrall",
   },
 ];
+
 describe("<Contact />", () => {
   it("updates and submits form correctly", async () => {
     const { getByTestId } = render(<Contact history={[]} />);

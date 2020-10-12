@@ -22,20 +22,31 @@ describe("<PortfolioItem />", () => {
       <PortfolioItem {...testData} />
     );
 
-    // expect image to use screenshot as source and link to url
+    // expect a title
+    const title = getByTestId("portfolio-item-title");
+    expect(title.textContent).toBeTruthy();
+
+    // expect an image
     const image = getByTestId("portfolio-item-image");
     expect(image.getAttribute("src")).toBe(testData.screenshot);
-    expect(image.getAttribute("src")).toBe(testData.screenshot);
 
-    // expect links (image and button) to be test data url
+    // expect links in image and button
     const links = getAllByTestId("portfolio-item-links");
     links.forEach((link) => {
       expect(link.getAttribute("href")).toBe(testData.url);
     });
 
-    // expect github button to be test data github link
+    // expect github button to have a link
     const github = getByTestId("portfolio-item-github");
     expect(github.getAttribute("href")).toBe(testData.github);
+
+    // expect a description
+    const description = getByTestId("portfolio-item-description");
+    expect(description).toBeTruthy();
+
+    // expect a stack logos count to match test data
+    const stack = getByTestId("portfolio-item-stack");
+    expect(stack.childNodes.length).toBe(testData.stack.length);
   });
 
   it("renders without warnings or errors", () => {

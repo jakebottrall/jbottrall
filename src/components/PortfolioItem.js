@@ -68,14 +68,15 @@ export default function PortfolioItem(props) {
             gutterBottom
             align="center"
             component="h3"
+            data-testid="portfolio-item-title"
           >
             {title}
             <IconButton
               href={url}
               target="_blank"
               component={Link}
-              data-testid="portfolio-item-links"
               disabled={!url ? true : false}
+              data-testid="portfolio-item-links"
             >
               <OpenInNewSharpIcon />
             </IconButton>
@@ -95,8 +96,11 @@ export default function PortfolioItem(props) {
               {github ? "Check out the repo" : "Sorry this is a private repo"}
             </Button>
           </Typography>
-          <div>{description()}</div>
-          <div className={classes.stackWrapper}>
+          <div data-testid="portfolio-item-description">{description()}</div>
+          <div
+            className={classes.stackWrapper}
+            data-testid="portfolio-item-stack"
+          >
             {stack.map((x, i) => (
               <LightTooltip key={i} title={x.name}>
                 <img src={x.logo} alt={x.name} className={classes.svg} />

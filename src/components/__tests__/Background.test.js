@@ -19,7 +19,7 @@ global.Image = class {
   }
 };
 
-// set up makestyles
+// set up mock for makestyles
 jest.mock("@material-ui/core/styles", () => ({
   makeStyles: () =>
     jest.fn(() => {
