@@ -32,7 +32,7 @@ const defaultForm = {
   message: "",
   mailgunDomain: "MG_DACIA_TECH",
   recipient: "jakebottrall@gmail.com",
-  logoUrl: "jakebottrall.com/public/jbottrall-logo.png",
+  logoUrl: "public/jbottrall-logo.png",
   reCaptcha: { secretKey: "JAKE_BOTTRALL_SECRET_KEY" },
 };
 
