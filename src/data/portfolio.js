@@ -16,6 +16,7 @@ import awes from "../assets/screenshots/awes.png";
 import bidbox from "../assets/screenshots/bidbox.png";
 import daciatech from "../assets/screenshots/daciatech.png";
 import eim from "../assets/screenshots/eim.png";
+import ghostContact from "../assets/screenshots/ghost-contact.png";
 import jbottrall from "../assets/screenshots/jbottrall.png";
 import summitseekers from "../assets/screenshots/summitseekers.png";
 
@@ -36,6 +37,35 @@ export const data = [
     stack: [
       { name: "Material-UI", logo: material },
       { name: "React", logo: react },
+      { name: "Node.js", logo: nodeJs },
+      { name: "Nginx", logo: nginx },
+      { name: "Ubuntu 18.04 LTS", logo: ubuntu },
+    ],
+  },
+  {
+    screenshot: ghostContact,
+    title: "Ghost Contact",
+    description: function () {
+      return (
+        <span>
+          This is a simple node.js api for submitting contact forms using
+          google's{" "}
+          <Link href="https://developers.google.com/recaptcha/docs/v3">
+            reCaptcha v3
+          </Link>{" "}
+          api and <Link href="https://app.mailgun.com/">mailgun's</Link> api.
+          <br />
+          <br />
+          Originally built to facilitate contact form submission for sites I
+          built on <Link href="https://ghost.org">Ghost</Link>, it's been easily
+          adaptable to other frontend frameworks. For example the contact form
+          on this React based app, makes use of the api.
+        </span>
+      );
+    },
+    url: "https://github.com/jakebottrall/ghost-contact",
+    github: "https://github.com/jakebottrall/ghost-contact",
+    stack: [
       { name: "Node.js", logo: nodeJs },
       { name: "Nginx", logo: nginx },
       { name: "Ubuntu 18.04 LTS", logo: ubuntu },
