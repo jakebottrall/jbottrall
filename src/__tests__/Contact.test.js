@@ -3,8 +3,8 @@ import React from "react";
 
 import { cleanup, fireEvent, render, waitFor } from "@testing-library/react";
 
-import { apiCall, validateCaptcha } from "../../services/api";
-import Contact from "../Contact.js";
+import Contact from "../components/Contact.js";
+import { apiCall, validateCaptcha } from "../services/api";
 
 afterEach(cleanup);
 
@@ -18,7 +18,7 @@ jest.spyOn(notistack, "useSnackbar").mockImplementation(() => {
 });
 
 // set up mocks for apis
-jest.mock("../../services/api", () => ({
+jest.mock("../services/api", () => ({
   apiCall: jest.fn(() => {}),
   validateCaptcha: jest.fn(() => "asdfasdfasdfh8a7sdy034pb"),
 }));

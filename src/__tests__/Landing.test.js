@@ -3,7 +3,7 @@ import { MemoryRouter } from "react-router-dom";
 
 import { cleanup, render } from "@testing-library/react";
 
-import Landing, { navItems } from "../Landing.js";
+import Landing, { navItems } from "../components/Landing.js";
 
 afterEach(cleanup);
 

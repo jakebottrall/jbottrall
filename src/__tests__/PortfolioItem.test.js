@@ -2,8 +2,8 @@ import React from "react";
 
 import { cleanup, render } from "@testing-library/react";
 
-import { data } from "../../data/portfolio";
-import PortfolioItem from "../PortfolioItem";
+import PortfolioItem from "../components/PortfolioItem";
+import { data } from "../data/portfolio";
 
 afterEach(cleanup);
 

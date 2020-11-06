@@ -2,8 +2,8 @@ import React from "react";
 
 import { cleanup, render, waitFor } from "@testing-library/react";
 
-import Boat from "../../assets/boat.png";
-import Background from "../Background";
+import Boat from "../assets/boat.png";
+import Background from "../components/Background";
 
 afterEach(cleanup);
 

@@ -3,7 +3,7 @@ import { MemoryRouter } from "react-router-dom";
 
 import { cleanup, render, waitFor } from "@testing-library/react";
 
-import { Main } from "../Main";
+import { Main } from "../components/Main";
 
 afterEach(cleanup);
 
