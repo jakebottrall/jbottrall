@@ -11,7 +11,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 
 import { apiCall, validateCaptcha } from "../services/api";
-import Loader from "./Feedback/Loader";
+import Loader from "./feedback/Loader";
 
 // configure contact form urls based on environment
 const baseUrl =

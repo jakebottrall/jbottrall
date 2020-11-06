@@ -4,13 +4,13 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 import { makeStyles } from "@material-ui/core/styles";
 
+import useBackgroundStatus from "../hooks/useBackgroundStatus";
 import BackButton from "./BackButton";
 import Background from "./Background";
 import Contact from "./Contact";
-import Loader from "./Feedback/Loader";
-import useBackgroundStatus from "./Hooks/useBackgroundStatus";
 import Landing from "./Landing";
 import Portfolio from "./Portfolio";
+import Loader from "./feedback/Loader";
 
 const routes = [
   { path: "/", Component: Landing },

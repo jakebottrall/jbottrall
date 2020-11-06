@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import BG from "../assets/background.png";
 import Boat from "../assets/boat.png";
-import useBackgroundStatus from "./Hooks/useBackgroundStatus";
+import useBackgroundStatus from "../hooks/useBackgroundStatus";
 
 export default function Home() {
   const classes = useStyles();

@@ -4,7 +4,7 @@ import { Tab, Tabs, Typography } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { data } from "../data/portfolio";
-import useWindowSize from "./Hooks/useWindowSize";
+import useWindowSize from "../hooks/useWindowSize";
 import PortfolioItem from "./PortfolioItem";
 
 export default function Portfolio() {

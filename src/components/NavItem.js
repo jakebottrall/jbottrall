@@ -3,7 +3,7 @@ import React from "react";
 
 import { IconButton, Zoom } from "@material-ui/core";
 
-import { LightTooltip } from "./Feedback/Tooltips";
+import { LightTooltip } from "./feedback/Tooltips";
 
 export default function NavItem(props) {
   const { to, href, component, type, delay, title, Icon } = props;

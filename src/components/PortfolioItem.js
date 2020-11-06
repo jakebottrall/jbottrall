@@ -15,7 +15,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import OpenInNewSharpIcon from "@material-ui/icons/OpenInNewSharp";
 
-import { LightTooltip } from "./Feedback/Tooltips";
+import { LightTooltip } from "./feedback/Tooltips";
 
 export default function PortfolioItem(props) {
   const {
