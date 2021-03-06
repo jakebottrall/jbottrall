@@ -14,7 +14,6 @@ import argusvision from "../assets/screenshots/argusvision.png";
 import armax from "../assets/screenshots/armax.png";
 import awes from "../assets/screenshots/awes.png";
 import bidbox from "../assets/screenshots/bidbox.png";
-import daciatech from "../assets/screenshots/daciatech.png";
 import eim from "../assets/screenshots/eim.png";
 import ghostContact from "../assets/screenshots/ghost-contact.png";
 import jbottrall from "../assets/screenshots/jbottrall.png";
@@ -159,29 +158,6 @@ export const data = [
       { name: "React", logo: react },
       { name: "Node.js", logo: nodeJs },
       { name: "MongoDB", logo: mongo },
-      { name: "Nginx", logo: nginx },
-      { name: "Ubuntu 18.04 LTS", logo: ubuntu },
-    ],
-  },
-  {
-    screenshot: daciatech,
-    title: "daciatech.com",
-    url: "https://daciatech.com",
-    github: "https://github.com/jakebottrall/dacia-ghost-theme",
-    description: function () {
-      return (
-        <span>
-          <Link href="https://daciatech.com" taget="_blank">
-            Dacia Tech{" "}
-          </Link>
-          is the business I operate under as a freelancer. A simple business
-          site built with a custom ghost handlebars theme.
-        </span>
-      );
-    },
-    stack: [
-      { name: "less", logo: less },
-      { name: "Ghost", logo: ghost },
       { name: "Nginx", logo: nginx },
       { name: "Ubuntu 18.04 LTS", logo: ubuntu },
     ],
